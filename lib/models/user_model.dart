@@ -8,6 +8,7 @@ class UserModel {
   final bool isAuthenticated; // if guest or not
   final int karma;
   final List<String> awards;
+
   UserModel({
     required this.name,
     required this.profilePic,

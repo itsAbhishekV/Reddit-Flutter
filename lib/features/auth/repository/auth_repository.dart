@@ -2,9 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:reddit_clone/core/constants/firebase_constants.dart';
+import 'package:reddit_clone/core/failures.dart';
 import 'package:reddit_clone/core/providers/firbase_provider.dart';
+import 'package:reddit_clone/core/type_defs.dart';
 import 'package:reddit_clone/models/user_model.dart';
 
 import '../../../core/constants/constants.dart';
@@ -26,10 +29,11 @@ class AuthRepository {
   })  : _auth = auth,
         _firestore = firestore,
         _googleSignIn = googleSignIn;
-  
-  CollectionReference get _users => _firestore.collection(FirebaseConstants.usersCollection);
-  
-  Future<UserModel> signInWithGoogle() async {
+
+  CollectionReference get _users =>
+      _firestore.collection(FirebaseConstants.usersCollection);
+
+  FutureEither<UserModel> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       final googleAuth = await googleUser?.authentication;
@@ -38,14 +42,14 @@ class AuthRepository {
 
       UserCredential userCredentials =
           await _auth.signInWithCredential(credential);
-      print('Signed in with: ${userCredentials.user?.email}');
 
-      late UserModel userModel;
+      UserModel userModel;
 
-      if(userCredentials.additionalUserInfo!.isNewUser){
+      if (userCredentials.additionalUserInfo!.isNewUser) {
         userModel = UserModel(
             name: userCredentials.user!.displayName ?? 'No Name',
-            profilePic: userCredentials.user!.photoURL ?? Constants.avatarDefault,
+            profilePic:
+                userCredentials.user!.photoURL ?? Constants.avatarDefault,
             banner: Constants.bannerDefault,
             uid: userCredentials.user!.uid,
             isAuthenticated: true,
@@ -53,10 +57,21 @@ class AuthRepository {
             awards: []);
 
         await _users.doc(userModel.uid).set(userModel.toMap());
+      } else {
+        userModel = await getUserData(userCredentials.user!.uid).first;
+        // print(userModel);
       }
 
+      return right(userModel);
+    } on FirebaseException catch (e) {
+      throw e.message!;
     } catch (e) {
-        rethrow;
+      return left(Failure(e.toString()));
     }
+  }
+
+  Stream<UserModel> getUserData(String uid) {
+    return _users.doc(uid).snapshots().map(
+        (event) => UserModel.fromMap(event.data() as Map<String, dynamic>));
   }
 }
