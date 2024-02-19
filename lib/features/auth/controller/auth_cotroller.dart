@@ -10,7 +10,7 @@ class AuthController{
     required AuthRepository authRepository
 }) : _authRepository = authRepository;
 
-  void singInWithGoogle(){
-    _authRepository.signInWithGoogle();
+  void singInWithGoogle() async{
+    final user = await _authRepository.signInWithGoogle();
   }
 }

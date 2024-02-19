@@ -5,7 +5,6 @@ import 'package:reddit_clone/features/auth/screens/login_screen.dart';
 import 'package:reddit_clone/theme/palette.dart';
 import 'package:reddit_clone/firebase_options.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
