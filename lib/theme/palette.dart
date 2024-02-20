@@ -16,6 +16,10 @@ class Palette {
     scaffoldBackgroundColor: blackColor,
     cardColor: greyColor,
     appBarTheme: const AppBarTheme(
+      titleTextStyle: TextStyle(
+        fontSize: 20 ,
+        fontWeight: FontWeight.w500,
+      ),
       backgroundColor: drawerColor,
       iconTheme: IconThemeData(
         color: whiteColor,
