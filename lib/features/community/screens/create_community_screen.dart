@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:reddit_clone/core/common/loader.dart';
+import 'package:reddit_clone/features/community/controller/community_controller.dart';
 
 class CreateCommunityScreen extends ConsumerStatefulWidget {
   const CreateCommunityScreen({super.key});
@@ -19,14 +21,19 @@ class _CreateCommunityScreenState extends ConsumerState<CreateCommunityScreen> {
     communityNameController.dispose();
   }
 
+  void createCommunity(WidgetRef ref){
+    ref.read(CommunityControllerProvider.notifier).createCommunity(communityNameController.text.trim(), context);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final isLoading = ref.watch(CommunityControllerProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Create Community'),
         centerTitle: true,
       ),
-      body: Padding(
+      body: isLoading ? const Loader() : Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
@@ -48,11 +55,11 @@ class _CreateCommunityScreenState extends ConsumerState<CreateCommunityScreen> {
               ),
             const SizedBox(height: 30,),
             ElevatedButton(
-                onPressed: (){},
+                onPressed: () => createCommunity(ref),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blueAccent,
                   foregroundColor: Colors.white,
-                  minimumSize: const Size(double.infinity, 50),
+                  minimumSize: const Size(double.infinity, 45),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   )
