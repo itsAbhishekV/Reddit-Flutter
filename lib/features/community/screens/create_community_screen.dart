@@ -27,7 +27,7 @@ class _CreateCommunityScreenState extends ConsumerState<CreateCommunityScreen> {
         centerTitle: true,
       ),
       body: Padding(
-        padding: EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
             const Align(
@@ -50,10 +50,17 @@ class _CreateCommunityScreenState extends ConsumerState<CreateCommunityScreen> {
             ElevatedButton(
                 onPressed: (){},
                 style: ElevatedButton.styleFrom(
-                  maximumSize: const Size(double.infinity, 50),
-
-                ),
-                child: const Text('Create Community'),
+                  backgroundColor: Colors.blueAccent,
+                  foregroundColor: Colors.white,
+                  minimumSize: const Size(double.infinity, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  )
+              ),
+                child: const Text('Create Community',
+                style: TextStyle(
+                  fontSize: 17
+                ),),
             )
           ],
         ),
