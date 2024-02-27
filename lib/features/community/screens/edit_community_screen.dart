@@ -9,6 +9,7 @@ import 'package:reddit_clone/features/community/controller/community_controller.
 
 import '../../../core/common/error_text.dart';
 import '../../../core/constants/constants.dart';
+import '../../../models/community_model.dart';
 import '../../../theme/palette.dart';
 
 class EditCommunityScreen extends ConsumerStatefulWidget {
@@ -43,15 +44,22 @@ class _EditCommunityScreenState extends ConsumerState<EditCommunityScreen> {
     }
   }
 
+  void save(Community community){
+    ref.read(CommunityControllerProvider.notifier).editCommunity(profileFile: profileFile, bannerFile: bannerFile, context: context, community: community);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final isLoading = ref.watch(CommunityControllerProvider);
     return ref.watch(getCommunityByNameProvider(widget.name)).when(
         data: (community) => Scaffold(
           appBar: AppBar(
             title: const Text('Edit Community'),
             actions: [
               TextButton(
-                onPressed: (){},
+                onPressed: (){
+                  save(community);
+                },
                 child: const Text('Save',
                   style: TextStyle(
                       color: Colors.blueAccent,
@@ -60,7 +68,7 @@ class _EditCommunityScreenState extends ConsumerState<EditCommunityScreen> {
               ),
             ],
           ),
-          body: Padding(
+          body: isLoading ? const Loader() : Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
                 children: [
@@ -94,10 +102,14 @@ class _EditCommunityScreenState extends ConsumerState<EditCommunityScreen> {
                           left: 20,
                           child: GestureDetector(
                             onTap: selectProfileImage,
-                            child: CircleAvatar(
-                              backgroundImage: NetworkImage(community.avatar),
+                            child: profileFile !=null ? CircleAvatar(
+                              backgroundImage: FileImage(profileFile!),
                               radius: 32,
-                            ),
+                            ) :
+                                CircleAvatar(
+                                  backgroundImage: NetworkImage(community.avatar),
+                                  radius: 32,
+                                )
                           ),
                         )
                       ],
