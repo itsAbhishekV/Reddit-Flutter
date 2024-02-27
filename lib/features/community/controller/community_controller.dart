@@ -13,6 +13,10 @@ final UserCommunityProvider = StreamProvider((ref) {
   return communityController.getUserCommunities();
 });
 
+final getCommunityByNameProvider = StreamProvider.family((ref, String name) {
+  return ref.watch(CommunityControllerProvider.notifier).getCommunityByName(name);
+});
+
 final CommunityControllerProvider = StateNotifierProvider<CommunityController, bool>((ref) => CommunityController(communityRepository: ref.watch(CommunityRepositoryProvider), ref: ref));
 
 class CommunityController extends StateNotifier<bool>{
@@ -35,6 +39,10 @@ class CommunityController extends StateNotifier<bool>{
       showSnackBar(context, '${community.name} was created!');
       Routemaster.of(context).pop();
     } );
+  }
+
+  Stream<Community> getCommunityByName(String name){
+    return _communityRepository.getCommunityByName(name);
   }
 
   Stream<List<Community>> getUserCommunities(){

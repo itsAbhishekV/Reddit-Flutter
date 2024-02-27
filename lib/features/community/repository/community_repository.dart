@@ -28,7 +28,11 @@ class CommunityRepository{
       return communities;
     });
   }
-  
+
+  Stream<Community> getCommunityByName(String name){
+    return _communities.doc(name).snapshots().map((event) => Community.fromMap(event.data() as Map<String, dynamic>));
+  }
+
   FutureVoid createCommunity(Community community) async {
     try{
       var communityDoc = await _communities.doc(community.name).get();
