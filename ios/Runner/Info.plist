@@ -45,5 +45,7 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>image is required so that people can use images from their device as a community banner</string>
 </dict>
 </plist>

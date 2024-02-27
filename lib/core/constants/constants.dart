@@ -6,6 +6,5 @@ class Constants{
   static const bannerDefault =
       'https://e0.pxfuel.com/wallpapers/115/722/desktop-wallpaper-reddit-cartoon-resolution-background-and-cartoon-banner.jpg';
   static const avatarDefault =
-      'https://external-preview.redd.it/5kh5OreeLd85QsqYO1Xz_4XSLYwZntfjqou-8fyBFoE.png?auto=webp&s=dbdabd04c399ce9c761ff899f5d38656d1de87c2';
-
+      'https://www.redditstatic.com/avatars/avatar_default_02_0079D3.png';
 }
