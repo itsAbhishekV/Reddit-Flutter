@@ -11,16 +11,16 @@ import '../../../core/constants/constants.dart';
 import '../../../core/providers/storage_repository_provider.dart';
 import '../../../core/utils.dart';
 
-final UserCommunityProvider = StreamProvider((ref) {
-  final communityController = ref.watch(CommunityControllerProvider.notifier);
+final userCommunityProvider = StreamProvider((ref) {
+  final communityController = ref.watch(communityControllerProvider.notifier);
   return communityController.getUserCommunities();
 });
 
 final getCommunityByNameProvider = StreamProvider.family((ref, String name) {
-  return ref.watch(CommunityControllerProvider.notifier).getCommunityByName(name);
+  return ref.watch(communityControllerProvider.notifier).getCommunityByName(name);
 });
 
-final CommunityControllerProvider = StateNotifierProvider<CommunityController, bool>((ref) => CommunityController(communityRepository: ref.watch(CommunityRepositoryProvider), ref: ref, storageRepository: ref.watch(StorageRepositoryProvider)));
+final communityControllerProvider = StateNotifierProvider<CommunityController, bool>((ref) => CommunityController(communityRepository: ref.watch(CommunityRepositoryProvider), ref: ref, storageRepository: ref.watch(storageRepositoryProvider)));
 
 class CommunityController extends StateNotifier<bool>{
   final CommunityRepository _communityRepository;
@@ -58,18 +58,20 @@ class CommunityController extends StateNotifier<bool>{
 
   void editCommunity({required File? profileFile, required File? bannerFile, required BuildContext context, required Community community}) async {
     state = true;
+    var communityNew = community;
     if(profileFile != null){
       final res = await _storageRepository.storeFile(path: 'communities/profile', id: community.name, file: profileFile);
-      res.fold((l) => showSnackBar(context, l.message), (r) => community.copyWith(avatar: r));
+      res.fold((l) => showSnackBar(context, l.message), (r) => communityNew.copyWith(avatar: r));
     }
     if(bannerFile != null){
       final res = await _storageRepository.storeFile(path: 'communities/banner', id: community.name, file: bannerFile);
-      res.fold((l) => showSnackBar(context, l.message), (r) => community.copyWith(banner: r));
+      res.fold((l) => showSnackBar(context, l.message), (r) => communityNew.copyWith(banner: r));
     }
 
-    final res = await _communityRepository.editCommunity(community);
-    state = false;
+    final res = await _communityRepository.editCommunity(communityNew);
     res.fold((l) => showSnackBar(context, l.message), (r) => Routemaster.of(context).pop());
+
+    state = false;
   }
 
 }

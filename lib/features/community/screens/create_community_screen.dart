@@ -22,12 +22,12 @@ class _CreateCommunityScreenState extends ConsumerState<CreateCommunityScreen> {
   }
 
   void createCommunity(WidgetRef ref){
-    ref.read(CommunityControllerProvider.notifier).createCommunity(communityNameController.text.trim(), context);
+    ref.read(communityControllerProvider.notifier).createCommunity(communityNameController.text.trim(), context);
   }
 
   @override
   Widget build(BuildContext context) {
-    final isLoading = ref.watch(CommunityControllerProvider);
+    final isLoading = ref.watch(communityControllerProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Create Community'),

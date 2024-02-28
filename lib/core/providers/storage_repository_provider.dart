@@ -7,7 +7,7 @@ import 'package:reddit_clone/core/failures.dart';
 import 'package:reddit_clone/core/providers/firbase_provider.dart';
 import 'package:reddit_clone/core/type_defs.dart';
 
-final StorageRepositoryProvider = Provider((ref) => StorageRepository(firebaseStorage: ref.watch(storageProvider)));
+final storageRepositoryProvider = Provider((ref) => StorageRepository(firebaseStorage: ref.watch(storageProvider)));
 
 class StorageRepository{
   final FirebaseStorage _firebaseStorage;

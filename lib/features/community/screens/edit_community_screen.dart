@@ -45,12 +45,12 @@ class _EditCommunityScreenState extends ConsumerState<EditCommunityScreen> {
   }
 
   void save(Community community){
-    ref.read(CommunityControllerProvider.notifier).editCommunity(profileFile: profileFile, bannerFile: bannerFile, context: context, community: community);
+    ref.read(communityControllerProvider.notifier).editCommunity(profileFile: profileFile, bannerFile: bannerFile, context: context, community: community);
   }
 
   @override
   Widget build(BuildContext context) {
-    final isLoading = ref.watch(CommunityControllerProvider);
+    final isLoading = ref.watch(communityControllerProvider);
     return ref.watch(getCommunityByNameProvider(widget.name)).when(
         data: (community) => Scaffold(
           appBar: AppBar(
