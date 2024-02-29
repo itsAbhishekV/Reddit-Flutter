@@ -38,13 +38,11 @@ class _RedditCloneState extends ConsumerState<RedditClone> {
               theme: Palette.darkModeAppTheme,
               routerDelegate: RoutemasterDelegate(routesBuilder: (context) {
                 if (user != null) {
-                  ref.read(userProvider.notifier)
-                      .update((state) => UserModelOrError(model: user.toUserModel(), exceptionMessage: null,isLoading: false));
-                  return loggedInRoute;
+                 return loggedInRoute;
                 }
                 return loggedOutRoute;
               }),
-              routeInformationParser: RoutemasterParser(),
+              routeInformationParser: const RoutemasterParser(),
             ),
         error: (error, stack) => ErrorText(error: error.toString()),
         loading: () => const Loader());

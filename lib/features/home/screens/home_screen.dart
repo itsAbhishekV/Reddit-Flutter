@@ -3,12 +3,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reddit_clone/features/auth/controller/auth_cotroller.dart';
 import 'package:reddit_clone/features/home/delegates/search_community_delegate.dart';
 import 'package:reddit_clone/features/home/drawers/communitylist_drawer.dart';
+import 'package:reddit_clone/features/home/drawers/profile_drawer.dart';
+import 'package:reddit_clone/theme/palette.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
-  void displayDrawer(BuildContext context){
+  void displayCommunitydrawer(BuildContext context){
     Scaffold.of(context).openDrawer();
+  }
+
+  void displayProfileDrawer(BuildContext context){
+    Scaffold.of(context).openEndDrawer();
   }
 
   @override
@@ -16,13 +22,16 @@ class HomeScreen extends ConsumerWidget {
     final user = ref.watch(userProvider)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text('Home', style: TextStyle(
+          fontFamily: Palette.customFontFamily,
+          fontWeight: FontWeight.bold
+        ),),
         leading: Builder(
           builder: (context){
             return IconButton(
               icon: const Icon(Icons.menu),
               onPressed: (){
-                displayDrawer(context);
+                displayCommunitydrawer(context);
               },
             );
           },
@@ -31,15 +40,23 @@ class HomeScreen extends ConsumerWidget {
           IconButton(onPressed: (){
             showSearch(context: context, delegate: SearchCommunityDelegate(ref));
           }, icon: const Icon(Icons.search)),
-          IconButton(
-            onPressed: (){},
-            icon: CircleAvatar(
-              backgroundImage: NetworkImage(user.model?.profilePic ?? ""),
-            ),
+          Builder(
+            builder: (context) {
+              return IconButton(
+                onPressed: (){
+                  displayProfileDrawer(context);
+                },
+                icon: CircleAvatar(
+                  backgroundImage: NetworkImage(user.model?.profilePic ?? ""),
+                  radius: 20,
+                ),
+              );
+            }
           )
         ],
       ),
       drawer: const CommunityListDrawer(),
+      endDrawer: const ProfileDrawer(),
     );
   }
 }

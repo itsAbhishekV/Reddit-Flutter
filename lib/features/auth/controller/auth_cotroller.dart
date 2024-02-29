@@ -29,7 +29,15 @@ class AuthController extends StateNotifier<UserModelOrError> {
         _ref = ref,
         super(UserModelOrError(model:null,exceptionMessage: null, isLoading: false)); //loading
 
-  Stream<User?> get authStateChange => _authRepository.authStateChanged;
+  Stream<User?> get authStateChange => _authRepository.authStateChanged.map((user) {
+    if(user!=null){
+    _ref.read(userProvider.notifier)
+          .update((state) => UserModelOrError(model: user.toUserModel(), exceptionMessage: null,isLoading: false));
+
+    }
+
+    return user;
+  });
 
   void singInWithGoogle(BuildContext context) async {
     state = UserModelOrError(model:null,exceptionMessage: null, isLoading: true);
