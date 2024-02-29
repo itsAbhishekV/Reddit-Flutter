@@ -11,7 +11,7 @@ class LoginScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isLoading = ref.watch(authControllerProvider);
+    final userModelState = ref.watch(authControllerProvider);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -28,7 +28,7 @@ class LoginScreen extends ConsumerWidget {
           )
         ],
       ),
-      body: isLoading ? const Loader() : Column(
+      body: userModelState.isLoading ? const Loader() : Column(
         children: [
           const SizedBox(height: 30,),
 
@@ -48,6 +48,8 @@ class LoginScreen extends ConsumerWidget {
           ),
 
           const SizedBox(height: 20,),
+
+          Text(userModelState.exceptionMessage?? ""),
 
           const SignInButton()
         ],

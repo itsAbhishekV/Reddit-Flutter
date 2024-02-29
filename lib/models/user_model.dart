@@ -1,4 +1,32 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:reddit_clone/core/constants/constants.dart';
+
+class UserModelOrError {
+  final UserModel? model;
+  final String? exceptionMessage;
+  final bool isLoading;
+
+  UserModelOrError({
+    required this.model,
+    required this.exceptionMessage,
+    required this.isLoading
+});
+}
+
+ extension FirebaseUserToUserModel on User {
+  UserModel toUserModel(){
+   return UserModel(
+        name:this.displayName ?? 'No Name',
+        profilePic:
+       this.photoURL ?? Constants.avatarDefault,
+        banner: Constants.bannerDefault,
+        uid:this.uid,
+        isAuthenticated: true,
+        karma: 0,
+        awards: []);
+  }
+ }
 
 class UserModel {
   final String name;

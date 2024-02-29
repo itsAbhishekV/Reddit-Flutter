@@ -34,7 +34,7 @@ class HomeScreen extends ConsumerWidget {
           IconButton(
             onPressed: (){},
             icon: CircleAvatar(
-              backgroundImage: NetworkImage(user.profilePic),
+              backgroundImage: NetworkImage(user.model?.profilePic ?? ""),
             ),
           )
         ],

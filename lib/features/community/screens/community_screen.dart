@@ -57,7 +57,7 @@ class CommunityScreen extends ConsumerWidget {
                                           fontWeight: FontWeight.bold
                                         ),
                                       ),
-                                      community.mods.contains(user?.uid) ?
+                                      community.mods.contains(user?.model?.uid) ?
                                         OutlinedButton(
                                             style: ElevatedButton.styleFrom(
                                                 foregroundColor: Colors.blueAccent,
@@ -80,7 +80,7 @@ class CommunityScreen extends ConsumerWidget {
                                               padding: const EdgeInsets.symmetric(horizontal: 25)
                                             ),
                                             onPressed: (){},
-                                            child: Text(community.members.contains(user?.uid) ? 'Joined' : 'Join')
+                                            child: Text(community.members.contains(user?.model?.uid) ? 'Joined' : 'Join')
                                         ),
                                     ],
                                   ),

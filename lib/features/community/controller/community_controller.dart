@@ -53,7 +53,7 @@ class CommunityController extends StateNotifier<bool> {
 
   void createCommunity(String name, BuildContext context) async {
     state = true;
-    final uid = _ref.read(userProvider)?.uid ?? '';
+    final uid = _ref.read(userProvider)?.model?.uid ?? '';
     Community community = Community(
         id: name,
         name: name,
@@ -74,8 +74,11 @@ class CommunityController extends StateNotifier<bool> {
   }
 
   Stream<List<Community>> getUserCommunities() {
-    final uid = _ref.read(userProvider)!.uid;
-    return _communityRepository.getUserCommunities(uid);
+    final uid = _ref.read(userProvider)?.model?.uid;
+    if(uid == null){
+      throw Exception("uid was null");
+    }
+    return _communityRepository.getUserCommunities(uid!);
   }
 
   void editCommunity(

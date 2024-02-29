@@ -6,9 +6,9 @@ import 'package:reddit_clone/features/auth/repository/auth_repository.dart';
 import '../../../core/utils.dart';
 import '../../../models/user_model.dart';
 
-final userProvider = StateProvider<UserModel?>((ref) => null);
+final userProvider = StateProvider<UserModelOrError?>((ref) => null);
 
-final authControllerProvider = StateNotifierProvider<AuthController, bool>((ref) =>
+final authControllerProvider = StateNotifierProvider<AuthController, UserModelOrError>((ref) =>
     AuthController(authRepository: ref.watch(authRepositoryProvider), ref: ref));
 
 final authStateChangeProvider = StreamProvider((ref) {
@@ -21,24 +21,31 @@ final getUserDataProvider = StreamProvider.family((ref, String uid) {
   return authController.getUserData(uid);
 });
 
-class AuthController extends StateNotifier<bool> {
+class AuthController extends StateNotifier<UserModelOrError> {
   final AuthRepository _authRepository;
   final Ref _ref;
   AuthController({required Ref ref, required AuthRepository authRepository})
       : _authRepository = authRepository,
         _ref = ref,
-        super(false); //loading
+        super(UserModelOrError(model:null,exceptionMessage: null, isLoading: false)); //loading
 
   Stream<User?> get authStateChange => _authRepository.authStateChanged;
 
   void singInWithGoogle(BuildContext context) async {
-    state = true;
+    state = UserModelOrError(model:null,exceptionMessage: null, isLoading: true);
     final user = await _authRepository.signInWithGoogle();
-    state = false;
     user.fold(
-        (l) => showSnackBar(context, l.message),
+        (l) => _ref.read(userProvider.notifier).update((state) {
+          final result = UserModelOrError(model: null, exceptionMessage: l.message,isLoading: false);
+          this.state = result;
+          return result;
+        }),
         (userModel) =>
-            _ref.read(userProvider.notifier).update((state) => userModel));
+            _ref.read(userProvider.notifier).update((state) {
+              final result = UserModelOrError(model: userModel, exceptionMessage: null,isLoading: false);
+              this.state = result;
+              return result;
+            }));
   }
 
   Stream<UserModel> getUserData(String uid) => _authRepository.getUserData(uid);

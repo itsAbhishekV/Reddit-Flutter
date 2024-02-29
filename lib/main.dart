@@ -29,33 +29,24 @@ class RedditClone extends ConsumerStatefulWidget {
 }
 
 class _RedditCloneState extends ConsumerState<RedditClone> {
-
-  UserModel? userModel;
-
-  void getData(WidgetRef ref, User data) async {
-    userModel = await ref.watch(authControllerProvider.notifier).getUserData(data.uid).first;
-    ref.read(userProvider.notifier).update((state) => userModel);
-    setState(() {
-
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return ref.watch(authStateChangeProvider).when(data: (data) => MaterialApp.router(
-      title: 'Reddit',
-      debugShowCheckedModeBanner: false,
-      theme: Palette.darkModeAppTheme,
-      routerDelegate: RoutemasterDelegate(routesBuilder: (context) {
-        if(data != null){
-          getData(ref, data);
-          if(userModel != null){
-            return loggedInRoute;
-          }
-        }
-        return loggedOutRoute;
-      }),
-      routeInformationParser: RoutemasterParser(),
-    ), error: (error, stack) => ErrorText(error: error.toString()), loading: () => const Loader());
+    return ref.watch(authStateChangeProvider)
+        .when(data: (user) => MaterialApp.router(
+              title: 'Reddit',
+              debugShowCheckedModeBanner: false,
+              theme: Palette.darkModeAppTheme,
+              routerDelegate: RoutemasterDelegate(routesBuilder: (context) {
+                if (user != null) {
+                  ref.read(userProvider.notifier)
+                      .update((state) => UserModelOrError(model: user.toUserModel(), exceptionMessage: null,isLoading: false));
+                  return loggedInRoute;
+                }
+                return loggedOutRoute;
+              }),
+              routeInformationParser: RoutemasterParser(),
+            ),
+        error: (error, stack) => ErrorText(error: error.toString()),
+        loading: () => const Loader());
   }
 }
