@@ -9,27 +9,14 @@ class Palette {
   static var redColor = Colors.red.shade500;
   static var blueColor = Colors.blue.shade300;
 
-  // Font
-  static const String customFontFamily = 'Verdana'; // Change this to your desired font family
-
   // Themes
   static var darkModeAppTheme = ThemeData.dark().copyWith(
     scaffoldBackgroundColor: blackColor,
     cardColor: greyColor,
     appBarTheme: const AppBarTheme(
-      titleTextStyle: TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.w700,
-        fontFamily: customFontFamily
-      ),
       backgroundColor: drawerColor,
       iconTheme: IconThemeData(
         color: whiteColor,
-      ),
-    ),
-    textTheme: const TextTheme(
-      bodyMedium: TextStyle(
-        fontFamily: customFontFamily// Apply custom font to body text
       ),
     ),
     drawerTheme: const DrawerThemeData(
@@ -47,11 +34,6 @@ class Palette {
       elevation: 0,
       iconTheme: IconThemeData(
         color: blackColor,
-      ),
-    ),
-    textTheme: const TextTheme(
-      bodyMedium: TextStyle(
-        fontFamily: customFontFamily, // Apply custom font to body text
       ),
     ),
     drawerTheme: const DrawerThemeData(

@@ -26,7 +26,8 @@ class ProfileDrawer extends ConsumerWidget {
             ),
             Text(
               'u/${user.model?.name.replaceAll(" ", "")}' ?? '',
-              style: const TextStyle(fontFamily: Palette.customFontFamily, fontWeight: FontWeight.w500, fontSize: 18, letterSpacing: 0.4),
+              style: const TextStyle(
+                  fontWeight: FontWeight.w500, fontSize: 18, letterSpacing: 0.4),
             ),
             const SizedBox(
               height: 10,
@@ -37,17 +38,17 @@ class ProfileDrawer extends ConsumerWidget {
             ),
             ListTile(
               leading: const Icon(Icons.person),
-              title: const Text('My profile', style: TextStyle(
-                fontFamily: Palette.customFontFamily
-              ),),
+              title: const Text('My profile'),
               onTap: () {},
             ),
             ListTile(
               leading: const Icon(Icons.logout_outlined),
-              title: const Text('Log Out'),
+              title: const Text('Log out'),
               iconColor: Colors.red,
               onTap: () {},
-            )
+            ),
+            const SizedBox(height: 15),
+            Switch.adaptive(value: true, onChanged: (val) {}),
           ],
         ),
       ),

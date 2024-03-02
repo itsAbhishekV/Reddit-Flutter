@@ -23,7 +23,6 @@ class HomeScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home', style: TextStyle(
-          fontFamily: Palette.customFontFamily,
           fontWeight: FontWeight.bold
         ),),
         leading: Builder(
