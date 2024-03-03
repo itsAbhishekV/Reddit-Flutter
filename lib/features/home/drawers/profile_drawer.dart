@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reddit_clone/core/constants/constants.dart';
-import 'package:reddit_clone/features/auth/controller/auth_cotroller.dart';
+import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
 import 'package:reddit_clone/theme/palette.dart';
 
 class ProfileDrawer extends ConsumerWidget {
   const ProfileDrawer({super.key});
+
+  void logOut(WidgetRef ref) {
+    ref.read(authControllerProvider.notifier).logOut();
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -27,7 +31,9 @@ class ProfileDrawer extends ConsumerWidget {
             Text(
               'u/${user.model?.name.replaceAll(" ", "")}' ?? '',
               style: const TextStyle(
-                  fontWeight: FontWeight.w500, fontSize: 18, letterSpacing: 0.4),
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18,
+                  letterSpacing: 0.4),
             ),
             const SizedBox(
               height: 10,
@@ -45,7 +51,9 @@ class ProfileDrawer extends ConsumerWidget {
               leading: const Icon(Icons.logout_outlined),
               title: const Text('Log out'),
               iconColor: Colors.red,
-              onTap: () {},
+              onTap: () {
+                logOut(ref);
+              },
             ),
             const SizedBox(height: 15),
             Switch.adaptive(value: true, onChanged: (val) {}),

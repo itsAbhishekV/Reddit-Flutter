@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reddit_clone/core/common/loader.dart';
-import 'package:reddit_clone/features/auth/controller/auth_cotroller.dart';
+import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
 import 'package:reddit_clone/features/auth/screens/login_screen.dart';
 import 'package:reddit_clone/models/user_model.dart';
 import 'package:reddit_clone/router.dart';
@@ -31,14 +31,14 @@ class RedditClone extends ConsumerStatefulWidget {
 class _RedditCloneState extends ConsumerState<RedditClone> {
   @override
   Widget build(BuildContext context) {
-    return ref.watch(authStateChangeProvider)
-        .when(data: (user) => MaterialApp.router(
+    return ref.watch(authStateChangeProvider).when(
+        data: (user) => MaterialApp.router(
               title: 'Reddit',
               debugShowCheckedModeBanner: false,
               theme: Palette.darkModeAppTheme,
               routerDelegate: RoutemasterDelegate(routesBuilder: (context) {
                 if (user != null) {
-                 return loggedInRoute;
+                  return loggedInRoute;
                 }
                 return loggedOutRoute;
               }),
