@@ -7,26 +7,24 @@ class UserModelOrError {
   final String? exceptionMessage;
   final bool isLoading;
 
-  UserModelOrError({
-    required this.model,
-    required this.exceptionMessage,
-    required this.isLoading
-});
+  UserModelOrError(
+      {required this.model,
+      required this.exceptionMessage,
+      required this.isLoading});
 }
 
- extension FirebaseUserToUserModel on User {
-  UserModel toUserModel(){
-   return UserModel(
-        name:this.displayName ?? 'No Name',
-        profilePic:
-       this.photoURL ?? Constants.avatarDefault,
+extension FirebaseUserToUserModel on User {
+  UserModel toUserModel() {
+    return UserModel(
+        name: displayName ?? 'No Name',
+        profilePic: photoURL ?? Constants.avatarDefault,
         banner: Constants.bannerDefault,
-        uid:this.uid,
+        uid: uid,
         isAuthenticated: true,
         karma: 0,
         awards: []);
   }
- }
+}
 
 class UserModel {
   final String name;
@@ -113,11 +111,11 @@ class UserModel {
   @override
   int get hashCode {
     return name.hashCode ^
-    profilePic.hashCode ^
-    banner.hashCode ^
-    uid.hashCode ^
-    isAuthenticated.hashCode ^
-    karma.hashCode ^
-    awards.hashCode;
+        profilePic.hashCode ^
+        banner.hashCode ^
+        uid.hashCode ^
+        isAuthenticated.hashCode ^
+        karma.hashCode ^
+        awards.hashCode;
   }
 }
