@@ -2,12 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
 import 'package:reddit_clone/features/community/repository/community_repository.dart';
 import 'package:reddit_clone/models/community_model.dart';
 import 'package:routemaster/routemaster.dart';
 
 import '../../../core/constants/constants.dart';
+import '../../../core/failures.dart';
 import '../../../core/providers/storage_repository_provider.dart';
 import '../../../core/utils.dart';
 
@@ -79,6 +81,25 @@ class CommunityController extends StateNotifier<bool> {
       throw Exception("uid was null");
     }
     return _communityRepository.getUserCommunities(uid);
+  }
+
+  void joinOrLeaveCommunity(Community community, BuildContext context) async {
+    final userid = _ref.watch(userProvider)!.model?.uid;
+
+    Either<Failure, void> res;
+    if (community.members.contains(userid)) {
+      res = await _communityRepository.leaveCommunity(community.name, userid!);
+    } else {
+      res = await _communityRepository.joinCommunity(community.name, userid!);
+    }
+
+    res.fold((l) => showSnackBar(context, l.message), (r) {
+      if (community.members.contains(userid)) {
+        showSnackBar(context, "Successfully left community!");
+      } else {
+        showSnackBar(context, "Successfully joined community!");
+      }
+    });
   }
 
   void editCommunity(
