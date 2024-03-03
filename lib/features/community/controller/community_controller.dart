@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:reddit_clone/features/auth/controller/auth_cotroller.dart';
+import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
 import 'package:reddit_clone/features/community/repository/community_repository.dart';
 import 'package:reddit_clone/models/community_model.dart';
 import 'package:routemaster/routemaster.dart';
@@ -28,20 +28,20 @@ final searchCommunityProvider = StreamProvider.family((ref, String query) {
 
 final communityControllerProvider =
     StateNotifierProvider<CommunityController, bool>((ref) {
-      final communityRepository = ref.watch(communityRepositoryProvider);
-      final storageRepository = ref.watch(storageRepositoryProvider);
-      return CommunityController(
-        communityRepository: communityRepository,
-        storageRepository: storageRepository,
-        ref: ref,
-      );
-    }
-    );
+  final communityRepository = ref.watch(communityRepositoryProvider);
+  final storageRepository = ref.watch(storageRepositoryProvider);
+  return CommunityController(
+    communityRepository: communityRepository,
+    storageRepository: storageRepository,
+    ref: ref,
+  );
+});
 
 class CommunityController extends StateNotifier<bool> {
   final CommunityRepository _communityRepository;
   final Ref _ref;
   final StorageRepository _storageRepository;
+
   CommunityController({
     required CommunityRepository communityRepository,
     required Ref ref,
@@ -74,11 +74,11 @@ class CommunityController extends StateNotifier<bool> {
   }
 
   Stream<List<Community>> getUserCommunities() {
-    final uid = _ref.read(userProvider)?.model?.uid;
-    if(uid == null){
+    final uid = _ref.watch(userProvider)?.model?.uid;
+    if (uid == null) {
       throw Exception("uid was null");
     }
-    return _communityRepository.getUserCommunities(uid!);
+    return _communityRepository.getUserCommunities(uid);
   }
 
   void editCommunity(
@@ -86,9 +86,7 @@ class CommunityController extends StateNotifier<bool> {
       required File? bannerFile,
       required BuildContext context,
       required Community community}) async {
-
     state = true;
-
 
     if (profileFile != null) {
       final res = await _storageRepository.storeFile(
@@ -113,8 +111,7 @@ class CommunityController extends StateNotifier<bool> {
         (r) => Routemaster.of(context).pop());
   }
 
-  Stream<List<Community>> searchCommunity(String query){
+  Stream<List<Community>> searchCommunity(String query) {
     return _communityRepository.searchCommunity(query);
   }
-
 }

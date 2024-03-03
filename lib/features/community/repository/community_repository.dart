@@ -68,16 +68,21 @@ class CommunityRepository {
         .where(
           'name',
           isGreaterThanOrEqualTo: query.isEmpty ? 0 : query,
-          isLessThan: query.isEmpty ? null : query.substring(0, query.length - 1) +
-              String.fromCharCode(
-                query.codeUnitAt(query.length - 1) + 1,
-              ),
-        ).snapshots().map((event) {
-            List<Community> communities = [];
-            for(var community in event.docs){
-              communities.add(Community.fromMap(community.data() as Map<String, dynamic>));
-            }
-            return communities;
+          isLessThan: query.isEmpty
+              ? null
+              : query.substring(0, query.length - 1) +
+                  String.fromCharCode(
+                    query.codeUnitAt(query.length - 1) + 1,
+                  ),
+        )
+        .snapshots()
+        .map((event) {
+      List<Community> communities = [];
+      for (var community in event.docs) {
+        communities
+            .add(Community.fromMap(community.data() as Map<String, dynamic>));
+      }
+      return communities;
     });
   }
 }
