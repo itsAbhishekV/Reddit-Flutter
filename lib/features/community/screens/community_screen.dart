@@ -6,6 +6,7 @@ import 'package:reddit_clone/features/community/controller/community_controller.
 import 'package:routemaster/routemaster.dart';
 
 import '../../../core/common/error_text.dart';
+import '../../../models/community_model.dart';
 
 class CommunityScreen extends ConsumerWidget {
   final String name;
@@ -14,6 +15,13 @@ class CommunityScreen extends ConsumerWidget {
 
   void navigateToModTools(BuildContext context) {
     Routemaster.of(context).push('/mod-tools/$name');
+  }
+
+  void joinOrLeaveCommunity(
+      Community community, WidgetRef ref, BuildContext context) {
+    ref
+        .read(communityControllerProvider.notifier)
+        .joinOrLeaveCommunity(community, context);
   }
 
   @override
@@ -79,7 +87,10 @@ class CommunityScreen extends ConsumerWidget {
                                       ),
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 25)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    joinOrLeaveCommunity(
+                                        community, ref, context);
+                                  },
                                   child: Text(community.members
                                           .contains(user?.model?.uid)
                                       ? 'Joined'
