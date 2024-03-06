@@ -1,16 +1,28 @@
-# reddit_clone
+# Flutter Reddit Clone
 
-A new Flutter project.
+This is a Reddit clone application built with Flutter, utilizing Firebase and Riverpod for state
+management. The app aims to provide a Reddit-like experience where users can create communities,
+join existing ones, and engage in discussions.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- **User Authentication**: Users can sign in with their Google accounts.
+- **Community Creation**: Authenticated users can create new communities.
+- **Community Search**: Users can search for existing communities.
+- **Join/Leave Communities**: Users can join and leave communities.
+- **Community Management**: Community creators have access to moderator tools to manage their
+  communities, including editing the community profile and banner.
+- **Firebase Integration**:
+- Firebase Authentication for user authentication.
+- Cloud Firestore for storing user data and community information.
+- Firebase Storage for storing community banners and profile pictures.
+- **State Management**: Riverpod is used for efficient state management throughout the application.
 
-A few resources to get you started if this is your first Flutter project:
+## Technologies Used
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Flutter
+- Google SignIn
+- Firebase Authentication
+- Cloud Firestore
+- Firebase Storage
+- Riverpod (State Management)
