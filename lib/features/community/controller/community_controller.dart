@@ -102,6 +102,15 @@ class CommunityController extends StateNotifier<bool> {
     });
   }
 
+  void addMods(
+      String communityName, List<String> mods, BuildContext context) async {
+    final res = await _communityRepository.addMods(communityName, mods);
+    res.fold(
+      (l) => showSnackBar(context, l.message),
+      (r) => Routemaster.of(context).pop(),
+    );
+  }
+
   void editCommunity(
       {required File? profileFile,
       required File? bannerFile,
