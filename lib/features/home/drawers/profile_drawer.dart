@@ -3,12 +3,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reddit_clone/core/constants/constants.dart';
 import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
 import 'package:reddit_clone/theme/palette.dart';
+import 'package:routemaster/routemaster.dart';
 
 class ProfileDrawer extends ConsumerWidget {
   const ProfileDrawer({super.key});
 
   void logOut(WidgetRef ref) {
     ref.read(authControllerProvider.notifier).logOut();
+  }
+
+  void navigateToCommunity(BuildContext context) {
+    Routemaster.of(context).push('/create-community');
   }
 
   @override
@@ -46,6 +51,14 @@ class ProfileDrawer extends ConsumerWidget {
               leading: const Icon(Icons.person),
               title: const Text('My profile'),
               onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.add),
+              title: const Text('Create a community'),
+              iconColor: Colors.blue,
+              onTap: () {
+                navigateToCommunity(context);
+              },
             ),
             ListTile(
               leading: const Icon(Icons.logout_outlined),
