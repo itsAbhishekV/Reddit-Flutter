@@ -83,15 +83,18 @@ class UserProfileScreen extends ConsumerWidget {
                     sliver: SliverList(
                       delegate: SliverChildListDelegate(
                         [
-                          Text(
-                            user.name,
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: Text(
+                              user.name,
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 2.0),
+                            padding: const EdgeInsets.only(top: 1.0),
                             child: Row(
                               children: [
                                 Text('u/${user.name.replaceAll(" ", "")}'),
@@ -108,15 +111,6 @@ class UserProfileScreen extends ConsumerWidget {
                                   width: 4,
                                 ),
                                 Text('${user.karma} karma'),
-                                const Text(
-                                  '•',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(
-                                  width: 4,
-                                ),
                               ],
                             ),
                           ),
