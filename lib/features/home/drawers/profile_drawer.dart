@@ -16,6 +16,10 @@ class ProfileDrawer extends ConsumerWidget {
     Routemaster.of(context).push('/create-community');
   }
 
+  void navigateToUserProfile(BuildContext context, String uid) {
+    Routemaster.of(context).push('/u/$uid');
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider)!;
@@ -48,12 +52,14 @@ class ProfileDrawer extends ConsumerWidget {
               height: 20,
             ),
             ListTile(
-              leading: const Icon(Icons.person),
+              leading: const Icon(Icons.person_outline_outlined),
               title: const Text('My profile'),
-              onTap: () {},
+              onTap: () {
+                navigateToUserProfile(context, user.model?.uid ?? "");
+              },
             ),
             ListTile(
-              leading: const Icon(Icons.add),
+              leading: const Icon(Icons.add_circle_outline_outlined),
               title: const Text('Create a community'),
               iconColor: Colors.blue,
               onTap: () {
