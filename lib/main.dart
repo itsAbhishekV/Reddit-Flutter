@@ -35,7 +35,7 @@ class _RedditCloneState extends ConsumerState<RedditClone> {
         data: (user) => MaterialApp.router(
               title: 'Reddit',
               debugShowCheckedModeBanner: false,
-              theme: Palette.darkModeAppTheme,
+              theme: ref.watch(themeNotifierProvider),
               routerDelegate: RoutemasterDelegate(routesBuilder: (context) {
                 if (user != null) {
                   return loggedInRoute;
