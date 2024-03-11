@@ -10,11 +10,11 @@ import '../../../models/community_model.dart';
 class CommunityListDrawer extends ConsumerWidget {
   const CommunityListDrawer({super.key});
 
-  void navigateToCreateCommunity(BuildContext context){
+  void navigateToCreateCommunity(BuildContext context) {
     Routemaster.of(context).push('/create-community');
   }
 
-  void navigateToCommunity(BuildContext context, Community community){
+  void navigateToCommunity(BuildContext context, Community community) {
     Routemaster.of(context).push('/r/${community.name}');
   }
 
@@ -29,30 +29,31 @@ class CommunityListDrawer extends ConsumerWidget {
             leading: const Icon(Icons.add),
             onTap: () => navigateToCreateCommunity(context),
           ),
-
-          ref.watch(userCommunityProvider)
-              .when(
-            data: (communities) => Expanded(
-              child: ListView.builder(
-                itemCount: communities.length,
-                itemBuilder: (BuildContext context, int index){
-                  final community = communities[index];
-                  return ListTile(
-                    title: Text('r/${community.name}'),
-                    leading: CircleAvatar(
-                      radius: 20,
-                      backgroundImage: NetworkImage(community.avatar),
-                    ),
-                    onTap: (){
-                      navigateToCommunity(context, community);
-                    },
-                  );
-                },
-              ),
-            ),
-            error: (err, stack) => ErrorText(error: err.toString()),
-            loading: () => const Loader(),
-          )
+          ref.watch(userCommunityProvider).when(
+                data: (communities) => ExpansionTile(
+                    title: const Text('Your Communities'),
+                    children: <Widget>[
+                      ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: communities.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final community = communities[index];
+                          return ListTile(
+                            title: Text('r/${community.name}'),
+                            leading: CircleAvatar(
+                              radius: 20,
+                              backgroundImage: NetworkImage(community.avatar),
+                            ),
+                            onTap: () {
+                              navigateToCommunity(context, community);
+                            },
+                          );
+                        },
+                      ),
+                    ]),
+                error: (err, stack) => ErrorText(error: err.toString()),
+                loading: () => const Loader(),
+              )
         ],
       )),
     );
