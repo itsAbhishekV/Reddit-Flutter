@@ -5,9 +5,28 @@ import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
 import 'package:reddit_clone/theme/palette.dart';
 import 'package:routemaster/routemaster.dart';
 
-class ProfileDrawer extends ConsumerWidget {
+// class ProfileDrawer extends ConsumerStatefulWidget {
+//
+//
+//   const ProfileDrawer({super.key});
+//
+//
+//
+//   @override
+//   Widget build(BuildContext context, WidgetRef ref) {
+//
+//   }
+//
+// }
+
+class ProfileDrawer extends ConsumerStatefulWidget {
   const ProfileDrawer({super.key});
 
+  @override
+  ConsumerState createState() => _ProfileDrawerState();
+}
+
+class _ProfileDrawerState extends ConsumerState<ProfileDrawer> {
   void logOut(WidgetRef ref) {
     ref.read(authControllerProvider.notifier).logOut();
   }
@@ -25,7 +44,7 @@ class ProfileDrawer extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final user = ref.watch(userProvider)!;
     return Drawer(
       child: SafeArea(
@@ -82,7 +101,9 @@ class ProfileDrawer extends ConsumerWidget {
             Switch(
               value: ref.watch(themeNotifierProvider.notifier).mode ==
                   ThemeMode.dark,
-              onChanged: (val) => toggleTheme(ref),
+              onChanged: (val) => setState(() {
+                toggleTheme(ref);
+              }),
             ),
           ],
         ),
