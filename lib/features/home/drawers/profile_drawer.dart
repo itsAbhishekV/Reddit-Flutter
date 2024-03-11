@@ -98,7 +98,8 @@ class _ProfileDrawerState extends ConsumerState<ProfileDrawer> {
               },
             ),
             const SizedBox(height: 15),
-            Switch(
+            Switch.adaptive(
+              activeColor: Colors.blueAccent,
               value: ref.watch(themeNotifierProvider.notifier).mode ==
                   ThemeMode.dark,
               onChanged: (val) => setState(() {

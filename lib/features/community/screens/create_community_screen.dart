@@ -11,7 +11,6 @@ class CreateCommunityScreen extends ConsumerStatefulWidget {
 }
 
 class _CreateCommunityScreenState extends ConsumerState<CreateCommunityScreen> {
-
   final communityNameController = TextEditingController();
 
   @override
@@ -21,8 +20,10 @@ class _CreateCommunityScreenState extends ConsumerState<CreateCommunityScreen> {
     communityNameController.dispose();
   }
 
-  void createCommunity(WidgetRef ref){
-    ref.read(communityControllerProvider.notifier).createCommunity(communityNameController.text.trim(), context);
+  void createCommunity(WidgetRef ref) {
+    ref
+        .read(communityControllerProvider.notifier)
+        .createCommunity(communityNameController.text.trim(), context);
   }
 
   @override
@@ -33,45 +34,49 @@ class _CreateCommunityScreenState extends ConsumerState<CreateCommunityScreen> {
         title: const Text('Create Community'),
         centerTitle: true,
       ),
-      body: isLoading ? const Loader() : Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          children: [
-            const Align(
-              alignment: Alignment.topLeft,
-              child: Text('Community Name'),
-            ),
-            const SizedBox(height: 10,),
-            TextField(
-              controller: communityNameController,
-              decoration: const InputDecoration(
-                hintText: 'r/Community_name',
-                filled: true,
-                fillColor: Color.fromRGBO(47, 47, 47, 1),
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.all(14),
-                ),
-              maxLength: 21,
-              ),
-            const SizedBox(height: 30,),
-            ElevatedButton(
-                onPressed: () => createCommunity(ref),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueAccent,
-                  foregroundColor: Colors.white,
-                  minimumSize: const Size(double.infinity, 45),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+      body: isLoading
+          ? const Loader()
+          : Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                children: [
+                  const Align(
+                    alignment: Alignment.topLeft,
+                    child: Text('Community Name'),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  TextField(
+                    controller: communityNameController,
+                    decoration: const InputDecoration(
+                      hintText: 'r/Community_name',
+                      filled: true,
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.all(14),
+                    ),
+                    maxLength: 21,
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  ElevatedButton(
+                    onPressed: () => createCommunity(ref),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blueAccent,
+                        foregroundColor: Colors.white,
+                        minimumSize: const Size(double.infinity, 45),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        )),
+                    child: const Text(
+                      'Create Community',
+                      style: TextStyle(fontSize: 17),
+                    ),
                   )
+                ],
               ),
-                child: const Text('Create Community',
-                style: TextStyle(
-                  fontSize: 17
-                ),),
-            )
-          ],
-        ),
-      ),
+            ),
     );
   }
 }
