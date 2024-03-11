@@ -66,7 +66,9 @@ class UserProfileScreen extends ConsumerWidget {
                                       40.0), // Adjust to your preference
                                 ),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                navigateToEditUser(context);
+                              },
                               child: const Text(
                                 'Edit',
                                 style: TextStyle(

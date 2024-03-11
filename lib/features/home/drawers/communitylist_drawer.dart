@@ -32,23 +32,26 @@ class CommunityListDrawer extends ConsumerWidget {
           ref.watch(userCommunityProvider).when(
                 data: (communities) => ExpansionTile(
                     title: const Text('Your Communities'),
-                    children: <Widget>[
-                      ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: communities.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final community = communities[index];
-                          return ListTile(
-                            title: Text('r/${community.name}'),
-                            leading: CircleAvatar(
-                              radius: 20,
-                              backgroundImage: NetworkImage(community.avatar),
-                            ),
-                            onTap: () {
-                              navigateToCommunity(context, community);
-                            },
-                          );
-                        },
+                    iconColor: Colors.white,
+                    children: [
+                      SingleChildScrollView(
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: communities.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final community = communities[index];
+                            return ListTile(
+                              title: Text('r/${community.name}'),
+                              leading: CircleAvatar(
+                                radius: 20,
+                                backgroundImage: NetworkImage(community.avatar),
+                              ),
+                              onTap: () {
+                                navigateToCommunity(context, community);
+                              },
+                            );
+                          },
+                        ),
                       ),
                     ]),
                 error: (err, stack) => ErrorText(error: err.toString()),

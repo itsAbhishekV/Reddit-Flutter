@@ -11,6 +11,14 @@ class UserModelOrError {
       {required this.model,
       required this.exceptionMessage,
       required this.isLoading});
+
+  UserModelOrError copyWith(
+      {UserModel? model, String? exceptionMessage, bool? isLoading}) {
+    return UserModelOrError(
+        model: model ?? this.model,
+        exceptionMessage: exceptionMessage ?? this.exceptionMessage,
+        isLoading: isLoading ?? this.isLoading);
+  }
 }
 
 extension FirebaseUserToUserModel on User {

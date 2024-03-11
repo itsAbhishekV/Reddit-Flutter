@@ -13,7 +13,7 @@ import 'package:reddit_clone/models/user_model.dart';
 import '../../../core/constants/constants.dart';
 
 final authRepositoryProvider = Provider((ref) => AuthRepository(
-    firestore: ref.read(firestoreProvder),
+    firestore: ref.read(firestoreProvider),
     auth: ref.read(authProvider),
     googleSignIn: ref.read(googleSingInProvider)));
 

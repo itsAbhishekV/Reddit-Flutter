@@ -8,7 +8,7 @@ import 'package:reddit_clone/core/type_defs.dart';
 import 'package:reddit_clone/models/community_model.dart';
 
 final communityRepositoryProvider = Provider(
-    (ref) => CommunityRepository(firestore: ref.watch(firestoreProvder)));
+    (ref) => CommunityRepository(firestore: ref.watch(firestoreProvider)));
 
 class CommunityRepository {
   final FirebaseFirestore _firestore;
