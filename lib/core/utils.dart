@@ -5,8 +5,11 @@ void showSnackBar(BuildContext context, String text) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
 }
 
-Future<FilePickerResult?> pickImage(){
-  final image = FilePicker.platform.pickFiles(type: FileType.image);
+Future<FilePickerResult?> pickImage() async {
+  final image = await FilePicker.platform.pickFiles(
+    type: FileType.image,
+    compressionQuality: 30,
+  );
 
   return image;
 }
