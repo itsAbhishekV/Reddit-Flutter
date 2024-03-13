@@ -10,14 +10,13 @@ class CardComponent extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     double cardHeightWidth = 120;
-    Color color = const Color.fromRGBO(18, 18, 18, 1);
     final currentTheme = ref.watch(themeNotifierProvider);
     return SizedBox(
       width: cardHeightWidth,
       height: cardHeightWidth,
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        color: color,
+        color: currentTheme.cardTheme.color,
         child: Center(
             child: Icon(
           cardIcon,

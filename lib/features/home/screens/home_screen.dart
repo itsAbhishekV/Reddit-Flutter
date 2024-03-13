@@ -38,7 +38,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final user = ref.watch(userProvider)!;
     final currentTheme = ref.watch(themeNotifierProvider);
     return Scaffold(
+      backgroundColor: currentTheme.scaffoldBackgroundColor,
       appBar: AppBar(
+        backgroundColor: currentTheme.cardTheme.color,
         title: const Text(
           'Home',
           style: TextStyle(fontWeight: FontWeight.bold),
@@ -78,6 +80,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       endDrawer: const ProfileDrawer(),
       bottomNavigationBar: CupertinoTabBar(
         activeColor: currentTheme.iconTheme.color,
+        backgroundColor: currentTheme.cardTheme.color,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_filled),

@@ -18,38 +18,35 @@ class Palette {
 
   // Themes
   static var darkModeAppTheme = ThemeData.dark().copyWith(
-    scaffoldBackgroundColor: blackColor,
-    cardColor: greyColor,
-    appBarTheme: const AppBarTheme(
-      backgroundColor: drawerColor,
-      iconTheme: IconThemeData(
-        color: whiteColor,
+      scaffoldBackgroundColor: blackColor,
+      cardColor: greyColor,
+      appBarTheme: const AppBarTheme(
+        backgroundColor: drawerColor,
+        iconTheme: IconThemeData(
+          color: whiteColor,
+        ),
       ),
-    ),
-    drawerTheme: const DrawerThemeData(
-      backgroundColor: drawerColor,
-    ),
-    primaryColor: redColor,
-    backgroundColor:
-        drawerColor, // will be used as alternative background color
-  );
+      drawerTheme: const DrawerThemeData(
+        backgroundColor: drawerColor,
+      ),
+      primaryColor: redColor,
+      cardTheme: const CardTheme(color: drawerColor));
 
   static var lightModeAppTheme = ThemeData.light().copyWith(
-    scaffoldBackgroundColor: whiteColor,
-    cardColor: greyColor,
-    appBarTheme: const AppBarTheme(
-      backgroundColor: whiteColor,
-      elevation: 0,
-      iconTheme: IconThemeData(
-        color: blackColor,
+      scaffoldBackgroundColor: whiteColor,
+      cardColor: greyColor,
+      appBarTheme: const AppBarTheme(
+        backgroundColor: whiteColor,
+        elevation: 0,
+        iconTheme: IconThemeData(
+          color: blackColor,
+        ),
       ),
-    ),
-    drawerTheme: const DrawerThemeData(
-      backgroundColor: whiteColor,
-    ),
-    primaryColor: redColor,
-    backgroundColor: whiteColor,
-  );
+      drawerTheme: const DrawerThemeData(
+        backgroundColor: whiteColor,
+      ),
+      primaryColor: redColor,
+      cardTheme: const CardTheme(color: whiteColor));
 }
 
 class ThemeNotifier extends StateNotifier<ThemeData> {
