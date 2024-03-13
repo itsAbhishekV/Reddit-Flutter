@@ -6,12 +6,11 @@ import 'package:reddit_clone/features/auth/repository/auth_repository.dart';
 import '../../../core/utils.dart';
 import '../../../models/user_model.dart';
 
-final userProvider = StateProvider<UserModelOrError?>((ref) => null);
+final userProvider = StateProvider<UserState?>((ref) => null);
 
-final authControllerProvider =
-    StateNotifierProvider<AuthController, UserModelOrError>((ref) =>
-        AuthController(
-            authRepository: ref.watch(authRepositoryProvider), ref: ref));
+final authControllerProvider = StateNotifierProvider<AuthController, UserState>(
+    (ref) => AuthController(
+        authRepository: ref.watch(authRepositoryProvider), ref: ref));
 
 final authStateChangeProvider = StreamProvider((ref) {
   final authController = ref.watch(authControllerProvider.notifier);
@@ -23,20 +22,20 @@ final getUserDataProvider = StreamProvider.family((ref, String uid) {
   return authController.getUserData(uid);
 });
 
-class AuthController extends StateNotifier<UserModelOrError> {
+class AuthController extends StateNotifier<UserState> {
   final AuthRepository _authRepository;
   final Ref _ref;
 
   AuthController({required Ref ref, required AuthRepository authRepository})
       : _authRepository = authRepository,
         _ref = ref,
-        super(UserModelOrError(
+        super(UserState(
             model: null, exceptionMessage: null, isLoading: false)); //loading
 
   Stream<User?> get authStateChange =>
       _authRepository.authStateChanged.map((user) {
         if (user != null) {
-          _ref.read(userProvider.notifier).update((state) => UserModelOrError(
+          _ref.read(userProvider.notifier).update((state) => UserState(
               model: user.toUserModel(),
               exceptionMessage: null,
               isLoading: false));
@@ -46,18 +45,17 @@ class AuthController extends StateNotifier<UserModelOrError> {
       });
 
   void singInWithGoogle(BuildContext context) async {
-    state =
-        UserModelOrError(model: null, exceptionMessage: null, isLoading: true);
+    state = UserState(model: null, exceptionMessage: null, isLoading: true);
     final user = await _authRepository.signInWithGoogle();
     user.fold(
         (l) => _ref.read(userProvider.notifier).update((state) {
-              final result = UserModelOrError(
+              final result = UserState(
                   model: null, exceptionMessage: l.message, isLoading: false);
               this.state = result;
               return result;
             }),
         (userModel) => _ref.read(userProvider.notifier).update((state) {
-              final result = UserModelOrError(
+              final result = UserState(
                   model: userModel, exceptionMessage: null, isLoading: false);
               this.state = result;
               return result;

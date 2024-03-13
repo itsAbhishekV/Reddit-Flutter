@@ -22,7 +22,7 @@ class UserProfileRepository {
   CollectionReference get _users =>
       _firestore.collection(FirebaseConstants.usersCollection);
 
-  FutureVoid editProfile(UserModelOrError user) async {
+  FutureVoid editProfile(UserState user) async {
     try {
       return right(_users.doc(user.model!.uid).update(user.model!.toMap()));
     } on FirebaseException catch (e) {

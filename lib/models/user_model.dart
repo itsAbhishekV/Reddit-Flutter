@@ -2,19 +2,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:reddit_clone/core/constants/constants.dart';
 
-class UserModelOrError {
+class UserState {
   final UserModel? model;
   final String? exceptionMessage;
   final bool isLoading;
 
-  UserModelOrError(
+  UserState(
       {required this.model,
       required this.exceptionMessage,
       required this.isLoading});
 
-  UserModelOrError copyWith(
+  UserState copyWith(
       {UserModel? model, String? exceptionMessage, bool? isLoading}) {
-    return UserModelOrError(
+    return UserState(
         model: model ?? this.model,
         exceptionMessage: exceptionMessage ?? this.exceptionMessage,
         isLoading: isLoading ?? this.isLoading);

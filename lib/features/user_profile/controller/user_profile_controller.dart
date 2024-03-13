@@ -38,7 +38,7 @@ class UserProfileController extends StateNotifier<bool> {
     required String name,
   }) async {
     state = true;
-    UserModelOrError user = _ref.read(userProvider)!;
+    UserState user = _ref.read(userProvider)!;
     if (profileFile != null) {
       final res = await _storageRepository.storeFile(
           path: 'users/profile', id: user.model!.uid, file: profileFile);
