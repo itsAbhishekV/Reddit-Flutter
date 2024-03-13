@@ -1,6 +1,4 @@
 import 'dart:io';
-import 'dart:js_interop';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reddit_clone/core/providers/storage_repository_provider.dart';
@@ -12,6 +10,19 @@ import 'package:uuid/uuid.dart';
 import '../../../core/utils.dart';
 import '../../../models/community_model.dart';
 import '../../../models/post_model.dart';
+
+final postControllerProvider =
+    StateNotifierProvider<PostController, bool>((ref) {
+  return PostController(
+      postRepository: ref.read(postRepositoryProvider),
+      ref: ref,
+      storageRepository: ref.read(storageRepositoryProvider));
+});
+
+final userPostsProvider =
+    StreamProvider.family((ref, List<Community> communities) {
+  return ref.watch(postControllerProvider.notifier).fetchUserPosts(communities);
+});
 
 class PostController extends StateNotifier<bool> {
   final PostRepository _postRepository;
@@ -126,5 +137,13 @@ class PostController extends StateNotifier<bool> {
       showSnackBar(context, 'Posted Successfully!');
       Routemaster.of(context).pop();
     });
+  }
+
+  Stream<List<Post>> fetchUserPosts(List<Community> communities) {
+    if (communities.isNotEmpty) {
+      return _postRepository.fetchUserPosts(communities);
+    } else {
+      return Stream.value([]);
+    }
   }
 }
