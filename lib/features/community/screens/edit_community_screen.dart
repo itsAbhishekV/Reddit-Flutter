@@ -59,7 +59,10 @@ class _EditCommunityScreenState extends ConsumerState<EditCommunityScreen> {
     return ref.watch(getCommunityByNameProvider(widget.name)).when(
         data: (community) => Scaffold(
               appBar: AppBar(
-                title: const Text('Edit Community'),
+                title: const Text(
+                  'Edit Community',
+                  style: TextStyle(fontSize: 20),
+                ),
                 actions: [
                   TextButton(
                     onPressed: () {

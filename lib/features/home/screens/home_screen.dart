@@ -40,10 +40,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return Scaffold(
       backgroundColor: currentTheme.scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: currentTheme.cardTheme.color,
+        backgroundColor: currentTheme.appBarTheme.backgroundColor,
         title: const Text(
           'Home',
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         leading: Builder(
           builder: (context) {

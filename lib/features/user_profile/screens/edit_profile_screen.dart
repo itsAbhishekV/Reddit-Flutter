@@ -75,7 +75,10 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     return ref.watch(getUserDataProvider(widget.uid)).when(
         data: (user) => Scaffold(
               appBar: AppBar(
-                title: const Text('Edit Profile'),
+                title: const Text(
+                  'Edit Profile',
+                  style: TextStyle(fontSize: 20),
+                ),
                 actions: [
                   TextButton(
                     onPressed: save,

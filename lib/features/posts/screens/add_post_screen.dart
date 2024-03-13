@@ -11,9 +11,18 @@ class AddPostScreen extends ConsumerWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        CardComponent(cardIcon: Icons.image),
-        CardComponent(cardIcon: Icons.text_format_outlined),
-        CardComponent(cardIcon: Icons.link),
+        CardComponent(
+          cardIcon: Icons.image,
+          type: 'image',
+        ),
+        CardComponent(
+          cardIcon: Icons.link,
+          type: 'link',
+        ),
+        CardComponent(
+          cardIcon: Icons.text_format_outlined,
+          type: 'text',
+        ),
       ],
     );
   }
