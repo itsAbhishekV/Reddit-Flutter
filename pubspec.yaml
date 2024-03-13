@@ -49,6 +49,7 @@ dependencies:
       url: https://github.com/easyhour/flutter_file_picker.git
       ref: 1455-NPE-compress # or specify a different branch or tag
   shared_preferences: ^2.2.2
+  uuid: ^4.3.3
 
 dev_dependencies:
   flutter_test:
