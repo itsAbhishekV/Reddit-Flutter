@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
 import 'package:reddit_clone/features/posts/controller/post_controller.dart';
 import 'package:reddit_clone/theme/palette.dart';
+import 'package:routemaster/routemaster.dart';
 
 import '../../models/post_model.dart';
 import '../constants/constants.dart';
@@ -13,8 +14,63 @@ class PostComponent extends ConsumerWidget {
 
   const PostComponent({super.key, required this.post});
 
-  void deletePost(BuildContext context, WidgetRef ref) async {
-    ref.read(postControllerProvider.notifier).deletePost(context, post);
+  // void deletePost(BuildContext context, WidgetRef ref) async {
+  //   ref.read(postControllerProvider.notifier).deletePost(context, post);
+  // }
+
+  void deleteItem(BuildContext context, WidgetRef ref) async {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          title: const Text(
+            'Confirm Delete',
+            style: TextStyle(
+              color: Colors.black87,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          content: const Text(
+            'Are you sure you want to delete this post?',
+            style: TextStyle(
+              color: Colors.black54,
+              fontSize: 16.0,
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text(
+                'Cancel',
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 16.0,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                ref
+                    .read(postControllerProvider.notifier)
+                    .deletePost(context, post);
+                Routemaster.of(context).pop();
+              },
+              child: const Text(
+                'Delete',
+                style: TextStyle(
+                  color: Colors.red,
+                  fontSize: 16.0,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void upvote(WidgetRef ref) async {
@@ -84,7 +140,7 @@ class PostComponent extends ConsumerWidget {
                               ),
                               if (post.uid == user.model!.uid)
                                 IconButton(
-                                    onPressed: () => deletePost(context, ref),
+                                    onPressed: () => deleteItem(context, ref),
                                     icon: Icon(
                                       Icons.delete,
                                       color: Palette.redColor,
