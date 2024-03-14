@@ -50,6 +50,7 @@ dependencies:
       ref: 1455-NPE-compress # or specify a different branch or tag
   shared_preferences: ^2.2.2
   uuid: ^4.3.3
+  any_link_preview: ^3.0.1
 
 dev_dependencies:
   flutter_test:
@@ -91,9 +92,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Verdana
+    - family: MyFlutterApp
       fonts:
-        - asset: assets/fonts/verdana.ttf
+        - asset: assets/fonts/MyFlutterApp.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
