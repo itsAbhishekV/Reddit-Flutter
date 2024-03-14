@@ -1,4 +1,5 @@
 import 'package:any_link_preview/any_link_preview.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
@@ -81,6 +82,14 @@ class PostComponent extends ConsumerWidget {
     ref.read(postControllerProvider.notifier).downvote(post);
   }
 
+  void navigateToUserProfileFromPost(BuildContext context) {
+    Routemaster.of(context).push('/u/${post.uid}');
+  }
+
+  void navigateToCommunityScreenFromPost(BuildContext context) {
+    Routemaster.of(context).push('/r/${post.communityName}');
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentTheme = ref.watch(themeNotifierProvider);
@@ -121,16 +130,28 @@ class PostComponent extends ConsumerWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          'r/${post.communityName}',
-                                          style: const TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold),
+                                        GestureDetector(
+                                          onTap: () {
+                                            navigateToCommunityScreenFromPost(
+                                                context);
+                                          },
+                                          child: Text(
+                                            'r/${post.communityName}',
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold),
+                                          ),
                                         ),
-                                        Text(
-                                          'u/${post.username.replaceAll(" ", "")}',
-                                          style: const TextStyle(
-                                            fontSize: 12,
+                                        GestureDetector(
+                                          onTap: () {
+                                            navigateToUserProfileFromPost(
+                                                context);
+                                          },
+                                          child: Text(
+                                            'u/${post.username.replaceAll(" ", "")}',
+                                            style: const TextStyle(
+                                              fontSize: 12,
+                                            ),
                                           ),
                                         )
                                       ],
