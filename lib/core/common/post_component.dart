@@ -2,6 +2,7 @@ import 'package:any_link_preview/any_link_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
+import 'package:reddit_clone/features/posts/controller/post_controller.dart';
 import 'package:reddit_clone/theme/palette.dart';
 
 import '../../models/post_model.dart';
@@ -11,6 +12,18 @@ class PostComponent extends ConsumerWidget {
   final Post post;
 
   const PostComponent({super.key, required this.post});
+
+  void deletePost(BuildContext context, WidgetRef ref) async {
+    ref.read(postControllerProvider.notifier).deletePost(context, post);
+  }
+
+  void upvote(WidgetRef ref) async {
+    ref.read(postControllerProvider.notifier).upvote(post);
+  }
+
+  void downvote(WidgetRef ref) async {
+    ref.read(postControllerProvider.notifier).downvote(post);
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -24,7 +37,7 @@ class PostComponent extends ConsumerWidget {
         Container(
           decoration:
               BoxDecoration(color: currentTheme.drawerTheme.backgroundColor),
-          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+          padding: const EdgeInsets.all(6),
           child: Row(
             children: [
               Expanded(
@@ -32,8 +45,7 @@ class PostComponent extends ConsumerWidget {
                   children: [
                     Container(
                       padding: const EdgeInsets.symmetric(
-                              horizontal: 4, vertical: 16)
-                          .copyWith(right: 0),
+                          horizontal: 4, vertical: 8),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -72,7 +84,7 @@ class PostComponent extends ConsumerWidget {
                               ),
                               if (post.uid == user.model!.uid)
                                 IconButton(
-                                    onPressed: () {},
+                                    onPressed: () => deletePost(context, ref),
                                     icon: Icon(
                                       Icons.delete,
                                       color: Palette.redColor,
@@ -102,8 +114,7 @@ class PostComponent extends ConsumerWidget {
                             Padding(
                               padding: const EdgeInsets.only(top: 8.0),
                               child: SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.35,
+                                height: 120,
                                 width: double.infinity,
                                 child: AnyLinkPreview(
                                   displayDirection:
@@ -146,15 +157,16 @@ class PostComponent extends ConsumerWidget {
                                           SizedBox(
                                             width: 30,
                                             child: IconButton(
-                                                onPressed: () {},
-                                                icon: Icon(
-                                                  Constants.up,
-                                                  size: 20,
-                                                  color: post.upvotes.contains(
-                                                          user.model!.uid)
-                                                      ? Colors.deepOrange
-                                                      : Colors.grey,
-                                                )),
+                                              icon: Icon(
+                                                Constants.up,
+                                                size: 20,
+                                                color: post.upvotes.contains(
+                                                        user.model!.uid)
+                                                    ? Colors.deepOrange
+                                                    : Colors.grey,
+                                              ),
+                                              onPressed: () => upvote(ref),
+                                            ),
                                           ),
                                           Text(
                                             '${post.upvotes.length - post.downvotes.length == 0 ? 'Vote' : post.upvotes.length - post.downvotes.length}',
@@ -175,7 +187,7 @@ class PostComponent extends ConsumerWidget {
                                           SizedBox(
                                             width: 30,
                                             child: IconButton(
-                                                onPressed: () {},
+                                                onPressed: () => downvote(ref),
                                                 icon: Icon(
                                                   Constants.down,
                                                   size: 20,
