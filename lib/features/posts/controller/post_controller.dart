@@ -1,6 +1,8 @@
 import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:reddit_clone/core/providers/firbase_provider.dart';
 import 'package:reddit_clone/core/providers/storage_repository_provider.dart';
 import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
 import 'package:reddit_clone/features/posts/repository/post_repository.dart';
@@ -148,6 +150,13 @@ class PostController extends StateNotifier<bool> {
   }
 
   void deletePost(BuildContext context, Post post) async {
+    if (post.type == 'image') {
+      if (post.link != null && post.link!.isNotEmpty) {
+        final storage = FirebaseStorage.instance;
+        final imageRef = storage.ref('posts/${post.communityName}/${post.id}');
+        await imageRef.delete();
+      }
+    }
     final res = await _postRepository.deletePost(post);
     res.fold((l) => null,
         (r) => showSnackBar(context, 'Post Deleted Successfully!'));

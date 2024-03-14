@@ -7,17 +7,21 @@ import 'package:reddit_clone/core/failures.dart';
 import 'package:reddit_clone/core/providers/firbase_provider.dart';
 import 'package:reddit_clone/core/type_defs.dart';
 
-final storageRepositoryProvider = Provider((ref) => StorageRepository(firebaseStorage: ref.watch(storageProvider)));
+import '../../models/community_model.dart';
+import '../../models/post_model.dart';
 
-class StorageRepository{
+final storageRepositoryProvider = Provider(
+    (ref) => StorageRepository(firebaseStorage: ref.watch(storageProvider)));
+
+class StorageRepository {
   final FirebaseStorage _firebaseStorage;
 
-  StorageRepository({
-    required FirebaseStorage firebaseStorage
-}) : _firebaseStorage = firebaseStorage;
+  StorageRepository({required FirebaseStorage firebaseStorage})
+      : _firebaseStorage = firebaseStorage;
 
-  FutureEither<String> storeFile({required String path, required String id, required File? file}) async {
-    try{
+  FutureEither<String> storeFile(
+      {required String path, required String id, required File? file}) async {
+    try {
       final ref = _firebaseStorage.ref().child(path).child(id);
 
       UploadTask uploadTask = ref.putFile(file!);
