@@ -24,7 +24,7 @@ class PostComponent extends ConsumerWidget {
         Container(
           decoration:
               BoxDecoration(color: currentTheme.drawerTheme.backgroundColor),
-          padding: const EdgeInsets.symmetric(vertical: 10),
+          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
           child: Row(
             children: [
               Expanded(
@@ -121,25 +121,94 @@ class PostComponent extends ConsumerWidget {
                                 style: const TextStyle(color: Colors.grey),
                               ),
                             ),
-                          Row(
-                            children: [
-                              Row(
-                                children: [
-                                  IconButton(
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 10.0,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.only(
+                                          left: 4, right: 4),
+                                      height: 35,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.grey, width: 0.4),
+                                        borderRadius: BorderRadius.circular(25),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          SizedBox(
+                                            width: 30,
+                                            child: IconButton(
+                                                onPressed: () {},
+                                                icon: Icon(
+                                                  Constants.up,
+                                                  size: 20,
+                                                  color: post.upvotes.contains(
+                                                          user.model!.uid)
+                                                      ? Colors.deepOrange
+                                                      : Colors.grey,
+                                                )),
+                                          ),
+                                          Text(
+                                            '${post.upvotes.length - post.downvotes.length == 0 ? 'Vote' : post.upvotes.length - post.downvotes.length}',
+                                            style: const TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                          const SizedBox(
+                                            width: 6,
+                                          ),
+                                          const Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 8.0),
+                                            child: VerticalDivider(
+                                              thickness: 1,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 30,
+                                            child: IconButton(
+                                                onPressed: () {},
+                                                icon: Icon(
+                                                  Constants.down,
+                                                  size: 20,
+                                                  color: post.downvotes
+                                                          .contains(
+                                                              user.model!.uid)
+                                                      ? Colors.blue
+                                                      : Colors.grey,
+                                                )),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    IconButton(
                                       onPressed: () {},
                                       icon: const Icon(
-                                        Constants.up,
-                                        size: 30,
-                                      )),
-                                  IconButton(
-                                      onPressed: () {},
-                                      icon: const Icon(
-                                        Constants.down,
-                                        size: 30,
-                                      )),
-                                ],
-                              )
-                            ],
+                                          Icons.mode_comment_outlined,
+                                          size: 20,
+                                          color: Colors.grey),
+                                    ),
+                                    Text(
+                                      '${post.commentCount == 0 ? 'Comment' : post.commentCount}',
+                                      style: const TextStyle(fontSize: 14),
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
                           )
                         ],
                       ),

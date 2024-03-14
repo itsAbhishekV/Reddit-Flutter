@@ -40,6 +40,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return Scaffold(
       backgroundColor: currentTheme.scaffoldBackgroundColor,
       appBar: AppBar(
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1.0), // Adjust height as needed
+          child: Container(
+            color: Colors.grey, // Change color for your desired border
+            height: 0.6, // Adjust height as needed
+          ),
+        ),
         backgroundColor: currentTheme.appBarTheme.backgroundColor,
         title: const Text(
           'Home',
