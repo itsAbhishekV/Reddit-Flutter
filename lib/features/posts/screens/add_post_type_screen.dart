@@ -188,17 +188,21 @@ class _AddPostTypeScreenState extends ConsumerState<AddPostTypeScreen> {
                         return Align(
                           alignment: Alignment.centerLeft,
                           child: DropdownButton(
-                              focusColor: Colors.blue,
-                              value: selectedCommunity ?? data[0],
-                              items: data
-                                  .map((e) => DropdownMenuItem(
-                                      value: e, child: Text(e.name)))
-                                  .toList(),
-                              onChanged: (val) {
-                                setState(() {
-                                  selectedCommunity = val;
-                                });
-                              }),
+                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                            value: selectedCommunity ?? data[0],
+                            items: data
+                                .map((e) => DropdownMenuItem(
+                                    value: e, child: Text(e.name)))
+                                .toList(),
+                            onChanged: (val) {
+                              setState(() {
+                                selectedCommunity = val;
+                              });
+                            },
+                            style: const TextStyle(
+                              fontSize: 18,
+                            ),
+                          ),
                         );
                       },
                       error: (error, stackTrace) =>
