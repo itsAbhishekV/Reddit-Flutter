@@ -104,8 +104,9 @@ class PostComponent extends ConsumerWidget {
     return Column(
       children: [
         Container(
-          decoration:
-              BoxDecoration(color: currentTheme.drawerTheme.backgroundColor),
+          decoration: BoxDecoration(
+            color: currentTheme.drawerTheme.backgroundColor,
+          ),
           padding: const EdgeInsets.all(6),
           child: Row(
             children: [
@@ -119,6 +120,7 @@ class PostComponent extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Row(
                                 children: [

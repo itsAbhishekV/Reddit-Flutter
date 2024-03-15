@@ -1,6 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:reddit_clone/core/common/post_component.dart';
 import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
+import 'package:reddit_clone/features/posts/controller/post_controller.dart';
+import 'package:reddit_clone/features/user_profile/controller/user_profile_controller.dart';
 import 'package:routemaster/routemaster.dart';
 
 import '../../../core/common/error_text.dart';
@@ -20,7 +24,7 @@ class UserProfileScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userForDate = ref.watch(userProvider)!;
+    final user = ref.watch(userProvider)!;
     return Scaffold(
       body: ref.watch(getUserDataProvider(uid)).when(
             data: (user) => NestedScrollView(
@@ -124,7 +128,33 @@ class UserProfileScreen extends ConsumerWidget {
                   ),
                 ];
               },
-              body: const Center(child: Text('Posts will be displayed here!')),
+              body: ref.watch(getUserPostsProvider(uid)).when(
+                    data: (posts) {
+                      return CustomScrollView(
+                        shrinkWrap: true, // Shrink wrap the contents
+                        slivers: [
+                          // Use SliverList directly instead of wrapping in SliverToBoxAdapter
+                          SliverList(
+                            delegate: SliverChildBuilderDelegate(
+                              (BuildContext context, int index) {
+                                final post = posts[index];
+                                return PostComponent(post: post);
+                              },
+                              childCount: posts.length,
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                    error: (error, stackTract) {
+                      if (kDebugMode) {
+                        print(error);
+                      }
+                      return SliverToBoxAdapter(
+                          child: ErrorText(error: error.toString()));
+                    },
+                    loading: () => const SliverToBoxAdapter(child: Loader()),
+                  ),
             ),
             error: (error, stackTrace) => ErrorText(error: error.toString()),
             loading: () => const Loader(),
