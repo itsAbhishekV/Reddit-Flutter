@@ -1,14 +1,18 @@
 import 'package:any_link_preview/any_link_preview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
+import 'package:reddit_clone/features/community/controller/community_controller.dart';
 import 'package:reddit_clone/features/posts/controller/post_controller.dart';
 import 'package:reddit_clone/theme/palette.dart';
 import 'package:routemaster/routemaster.dart';
 
 import '../../models/post_model.dart';
 import '../constants/constants.dart';
+import 'error_text.dart';
+import 'loader.dart';
 
 class PostComponent extends ConsumerWidget {
   final Post post;
@@ -118,10 +122,15 @@ class PostComponent extends ConsumerWidget {
                             children: [
                               Row(
                                 children: [
-                                  CircleAvatar(
-                                    backgroundImage:
-                                        NetworkImage(post.communityProfilePic),
-                                    radius: 16,
+                                  GestureDetector(
+                                    onTap: () =>
+                                        navigateToCommunityScreenFromPost(
+                                            context),
+                                    child: CircleAvatar(
+                                      backgroundImage: NetworkImage(
+                                          post.communityProfilePic),
+                                      radius: 16,
+                                    ),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(left: 8),
@@ -311,7 +320,28 @@ class PostComponent extends ConsumerWidget {
                                       )
                                     ],
                                   ),
-                                )
+                                ),
+                                ref
+                                    .watch(getCommunityByNameProvider(
+                                        post.communityName))
+                                    .when(
+                                        data: (data) {
+                                          if (data.mods
+                                              .contains(user.model!.uid)) {
+                                            return IconButton(
+                                                onPressed: () =>
+                                                    deleteItem(context, ref),
+                                                icon: const Icon(
+                                                  Icons.admin_panel_settings,
+                                                  size: 20,
+                                                  color: Colors.grey,
+                                                ));
+                                          }
+                                          return const SizedBox();
+                                        },
+                                        error: (error, stackTract) =>
+                                            ErrorText(error: error.toString()),
+                                        loading: () => const Loader())
                               ],
                             ),
                           )
