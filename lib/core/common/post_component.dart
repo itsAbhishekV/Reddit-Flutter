@@ -115,7 +115,6 @@ class PostComponent extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Row(
                                 children: [
@@ -271,7 +270,7 @@ class PostComponent extends ConsumerWidget {
                                                   color: post.downvotes
                                                           .contains(
                                                               user.model!.uid)
-                                                      ? Colors.blue
+                                                      ? Colors.deepOrange
                                                       : Colors.grey,
                                                 )),
                                           ),
@@ -280,21 +279,38 @@ class PostComponent extends ConsumerWidget {
                                     )
                                   ],
                                 ),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: const Icon(
-                                          Icons.mode_comment_outlined,
-                                          size: 20,
-                                          color: Colors.grey),
-                                    ),
-                                    Text(
-                                      '${post.commentCount == 0 ? 'Comment' : post.commentCount}',
-                                      style: const TextStyle(fontSize: 14),
-                                    )
-                                  ],
+                                Container(
+                                  height: 35,
+                                  padding: const EdgeInsets.only(
+                                    right: 14,
+                                    left: 4,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.grey, width: 0.4),
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                        width: 30,
+                                        child: IconButton(
+                                          onPressed: () {},
+                                          icon: const Icon(
+                                              Icons.mode_comment_outlined,
+                                              size: 20,
+                                              color: Colors.grey),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        '${post.commentCount == 0 ? 'Comment' : post.commentCount}',
+                                        style: const TextStyle(fontSize: 14),
+                                      )
+                                    ],
+                                  ),
                                 )
                               ],
                             ),
