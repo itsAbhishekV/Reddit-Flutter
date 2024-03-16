@@ -94,6 +94,10 @@ class PostComponent extends ConsumerWidget {
     Routemaster.of(context).push('/r/${post.communityName}');
   }
 
+  void navigateToCommentScreen(BuildContext context) {
+    Routemaster.of(context).push('/comment/${post.id}');
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentTheme = ref.watch(themeNotifierProvider);
@@ -290,37 +294,40 @@ class PostComponent extends ConsumerWidget {
                                     )
                                   ],
                                 ),
-                                Container(
-                                  height: 35,
-                                  padding: const EdgeInsets.only(
-                                    right: 14,
-                                    left: 4,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.grey, width: 0.4),
-                                    borderRadius: BorderRadius.circular(25),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      SizedBox(
-                                        width: 30,
-                                        child: IconButton(
-                                          onPressed: () {},
-                                          icon: const Icon(
-                                              Icons.mode_comment_outlined,
-                                              size: 20,
-                                              color: Colors.grey),
+                                GestureDetector(
+                                  onTap: () => navigateToCommentScreen(context),
+                                  child: Container(
+                                    height: 35,
+                                    padding: const EdgeInsets.only(
+                                      right: 14,
+                                      left: 4,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.grey, width: 0.4),
+                                      borderRadius: BorderRadius.circular(25),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 30,
+                                          child: IconButton(
+                                            onPressed: () {},
+                                            icon: const Icon(
+                                                Icons.mode_comment_outlined,
+                                                size: 20,
+                                                color: Colors.grey),
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        '${post.commentCount == 0 ? 'Comment' : post.commentCount}',
-                                        style: const TextStyle(fontSize: 14),
-                                      )
-                                    ],
+                                        const SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text(
+                                          '${post.commentCount == 0 ? 'Comment' : post.commentCount}',
+                                          style: const TextStyle(fontSize: 14),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 ref
