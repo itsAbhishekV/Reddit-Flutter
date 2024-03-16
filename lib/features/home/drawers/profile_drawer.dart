@@ -28,7 +28,7 @@ class ProfileDrawer extends ConsumerStatefulWidget {
 
 class _ProfileDrawerState extends ConsumerState<ProfileDrawer> {
   void logOut(WidgetRef ref) {
-    ref.read(authControllerProvider.notifier).logOut();
+    ref.watch(authControllerProvider.notifier).logOut();
   }
 
   void navigateToCommunity(BuildContext context) {
