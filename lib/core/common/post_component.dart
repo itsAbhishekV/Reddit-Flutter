@@ -95,7 +95,7 @@ class PostComponent extends ConsumerWidget {
   }
 
   void navigateToCommentScreen(BuildContext context) {
-    Routemaster.of(context).push('/comment/${post.id}');
+    Routemaster.of(context).push('/post/${post.id}/comments');
   }
 
   @override
@@ -312,7 +312,9 @@ class PostComponent extends ConsumerWidget {
                                         SizedBox(
                                           width: 30,
                                           child: IconButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              navigateToCommentScreen(context);
+                                            },
                                             icon: const Icon(
                                                 Icons.mode_comment_outlined,
                                                 size: 20,
