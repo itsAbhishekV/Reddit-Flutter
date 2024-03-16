@@ -24,7 +24,7 @@ class UserProfileScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(userProvider)!;
+    final userData = ref.watch(userProvider)!;
     return Scaffold(
       body: ref.watch(getUserDataProvider(uid)).when(
             data: (user) => NestedScrollView(
@@ -53,34 +53,36 @@ class UserProfileScreen extends ConsumerWidget {
                             ),
                           ),
                         ),
-                        Container(
-                            alignment: Alignment.bottomLeft,
-                            padding:
-                                const EdgeInsets.all(20).copyWith(left: 30),
-                            child: OutlinedButton(
-                              style: OutlinedButton.styleFrom(
-                                elevation: 2.0,
-                                shape: RoundedRectangleBorder(
-                                  side: const BorderSide(
-                                    width: 10.0,
-                                    color: Colors
-                                        .black, // Set your desired color here
+                        user.uid == userData.model!.uid
+                            ? Container(
+                                alignment: Alignment.bottomLeft,
+                                padding:
+                                    const EdgeInsets.all(20).copyWith(left: 30),
+                                child: OutlinedButton(
+                                  style: OutlinedButton.styleFrom(
+                                    elevation: 2.0,
+                                    shape: RoundedRectangleBorder(
+                                      side: const BorderSide(
+                                        width: 10.0,
+                                        color: Colors
+                                            .black, // Set your desired color here
+                                      ),
+                                      borderRadius: BorderRadius.circular(
+                                          40.0), // Adjust to your preference
+                                    ),
                                   ),
-                                  borderRadius: BorderRadius.circular(
-                                      40.0), // Adjust to your preference
-                                ),
-                              ),
-                              onPressed: () {
-                                navigateToEditUser(context);
-                              },
-                              child: const Text(
-                                'Edit',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ))
+                                  onPressed: () {
+                                    navigateToEditUser(context);
+                                  },
+                                  child: const Text(
+                                    'Edit',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ))
+                            : const SizedBox()
                       ],
                     ),
                   ),
