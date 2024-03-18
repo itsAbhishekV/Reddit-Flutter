@@ -5,6 +5,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:reddit_clone/core/constants/firebase_constants.dart';
 import 'package:reddit_clone/core/failures.dart';
 import 'package:reddit_clone/core/providers/firbase_provider.dart';
+import 'package:reddit_clone/models/comment_model.dart';
 import 'package:reddit_clone/models/post_model.dart';
 
 import '../../../core/type_defs.dart';
@@ -101,5 +102,15 @@ class PostRepository {
         .doc(postId)
         .snapshots()
         .map((event) => Post.fromMap(event.data() as Map<String, dynamic>));
+  }
+
+  FutureVoid addComment(Comment comment) async {
+    try {
+      return right(_comments.doc(comment.id).set(comment.toMap()));
+    } on FirebaseException catch (e) {
+      throw e.message!;
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
   }
 }

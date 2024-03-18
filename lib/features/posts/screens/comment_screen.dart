@@ -5,6 +5,7 @@ import 'package:reddit_clone/core/common/post_component.dart';
 import 'package:reddit_clone/features/posts/controller/post_controller.dart';
 
 import '../../../core/common/loader.dart';
+import '../../../models/post_model.dart';
 
 class CommentScreen extends ConsumerStatefulWidget {
   final String postId;
@@ -24,6 +25,11 @@ class _CommentScreenState extends ConsumerState<CommentScreen> {
     commentController.dispose();
   }
 
+  void addComment(Post post) {
+    ref.watch(postControllerProvider.notifier).addComment(
+        context: context, post: post, text: commentController.text.trim());
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -36,12 +42,19 @@ class _CommentScreenState extends ConsumerState<CommentScreen> {
                     const SizedBox(
                       height: 14,
                     ),
-                    TextField(
-                        controller: commentController,
-                        decoration: const InputDecoration(
-                            filled: true,
-                            hintText: 'Your thoughts?',
-                            border: InputBorder.none))
+                    SizedBox(
+                      height: 40,
+                      child: TextField(
+                          cursorColor: Colors.blueAccent,
+                          onSubmitted: (val) => addComment(post),
+                          controller: commentController,
+                          decoration: const InputDecoration(
+                              contentPadding:
+                                  EdgeInsets.only(bottom: 8, left: 15),
+                              filled: true,
+                              hintText: 'Your thoughts?',
+                              border: InputBorder.none)),
+                    )
                   ],
                 );
               },

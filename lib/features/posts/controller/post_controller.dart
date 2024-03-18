@@ -1,11 +1,13 @@
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reddit_clone/core/providers/firbase_provider.dart';
 import 'package:reddit_clone/core/providers/storage_repository_provider.dart';
 import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
 import 'package:reddit_clone/features/posts/repository/post_repository.dart';
+import 'package:reddit_clone/models/comment_model.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:uuid/uuid.dart';
 
@@ -178,5 +180,25 @@ class PostController extends StateNotifier<bool> {
 
   Stream<Post> getPostById(String postId) {
     return _postRepository.getPostById(postId);
+  }
+
+  void addComment(
+      {required BuildContext context,
+      required Post post,
+      required String text}) async {
+    final user = _ref.read(userProvider)!.model!;
+    final commentId = const Uuid().v1();
+    Comment comment = Comment(
+        id: commentId,
+        text: text,
+        createdAt: DateTime.now(),
+        postId: post.id,
+        username: user.name,
+        profilePic: user.profilePic);
+
+    final res = await _postRepository.addComment(comment);
+    res.fold((l) => showSnackBar(context, l.message), (r) {
+      showSnackBar(context, 'Comment shared successfully!');
+    });
   }
 }
