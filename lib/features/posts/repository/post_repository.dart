@@ -113,4 +113,16 @@ class PostRepository {
       return left(Failure(e.toString()));
     }
   }
+
+  Stream<List<Comment>> getComments(String postId) {
+    return _comments
+        .where('postId', isEqualTo: postId)
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .map((event) {
+      return event.docs
+          .map((e) => Comment.fromMap(e.data() as Map<String, dynamic>))
+          .toList();
+    });
+  }
 }

@@ -1,8 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reddit_clone/core/common/error_text.dart';
 import 'package:reddit_clone/core/common/post_component.dart';
 import 'package:reddit_clone/features/posts/controller/post_controller.dart';
+import 'package:reddit_clone/features/widgets/comment_component.dart';
 
 import '../../../core/common/loader.dart';
 import '../../../models/post_model.dart';
@@ -28,6 +30,9 @@ class _CommentScreenState extends ConsumerState<CommentScreen> {
   void addComment(Post post) {
     ref.watch(postControllerProvider.notifier).addComment(
         context: context, post: post, text: commentController.text.trim());
+    setState(() {
+      commentController.text = '';
+    });
   }
 
   @override
@@ -40,21 +45,42 @@ class _CommentScreenState extends ConsumerState<CommentScreen> {
                   children: [
                     PostComponent(post: post),
                     const SizedBox(
-                      height: 14,
+                      height: 6,
                     ),
-                    SizedBox(
-                      height: 40,
-                      child: TextField(
-                          cursorColor: Colors.blueAccent,
-                          onSubmitted: (val) => addComment(post),
-                          controller: commentController,
-                          decoration: const InputDecoration(
-                              contentPadding:
-                                  EdgeInsets.only(bottom: 8, left: 15),
-                              filled: true,
-                              hintText: 'Your thoughts?',
-                              border: InputBorder.none)),
-                    )
+                    TextField(
+                      cursorColor: Colors.blueAccent,
+                      onSubmitted: (val) => addComment(post),
+                      controller: commentController,
+                      decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.only(left: 15),
+                          filled: true,
+                          hintText: 'Your thoughts?',
+                          border: InputBorder.none),
+                    ),
+                    const SizedBox(
+                      height: 6,
+                    ),
+                    const SizedBox(
+                      height: 6,
+                    ),
+                    ref.watch(getPostCommentsProvider(widget.postId)).when(
+                        data: (comments) {
+                          return Expanded(
+                            child: ListView.builder(
+                                itemCount: comments.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  final comment = comments[index];
+                                  return CommentComponent(comment: comment);
+                                }),
+                          );
+                        },
+                        error: (error, stackTrace) {
+                          if (kDebugMode) {
+                            print(error.toString());
+                          }
+                          return ErrorText(error: error.toString());
+                        },
+                        loading: () => const Loader())
                   ],
                 );
               },

@@ -364,7 +364,10 @@ class PostComponent extends ConsumerWidget {
               )
             ],
           ),
-        )
+        ),
+        const SizedBox(
+          height: 2,
+        ),
       ],
     );
   }

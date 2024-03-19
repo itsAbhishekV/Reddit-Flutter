@@ -31,6 +31,9 @@ final userPostsProvider =
 final getPostByIdProvider = StreamProvider.family((ref, String postId) {
   return ref.watch(postControllerProvider.notifier).getPostById(postId);
 });
+final getPostCommentsProvider = StreamProvider.family((ref, String postId) {
+  return ref.watch(postControllerProvider.notifier).fetchPostComment(postId);
+});
 
 class PostController extends StateNotifier<bool> {
   final PostRepository _postRepository;
@@ -200,5 +203,9 @@ class PostController extends StateNotifier<bool> {
     res.fold((l) => showSnackBar(context, l.message), (r) {
       showSnackBar(context, 'Comment shared successfully!');
     });
+  }
+
+  Stream<List<Comment>> fetchPostComment(String postId) {
+    return _postRepository.getComments(postId);
   }
 }
