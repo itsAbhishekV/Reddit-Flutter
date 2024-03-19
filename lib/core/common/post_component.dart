@@ -1,7 +1,5 @@
 import 'package:any_link_preview/any_link_preview.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
 import 'package:reddit_clone/features/community/controller/community_controller.dart';
@@ -129,15 +127,15 @@ class PostComponent extends ConsumerWidget {
                               Row(
                                 children: [
                                   GestureDetector(
-                                    onTap: () =>
-                                        navigateToCommunityScreenFromPost(
-                                            context),
-                                    child: CircleAvatar(
-                                      backgroundImage: NetworkImage(
-                                          post.communityProfilePic),
-                                      radius: 16,
-                                    ),
-                                  ),
+                                      onTap: () =>
+                                          navigateToCommunityScreenFromPost(
+                                              context),
+                                      child: CircleAvatar(
+                                        backgroundImage: NetworkImage(
+                                            post.communityProfilePic),
+                                        radius: 16,
+                                      ),
+                                      Y),
                                   Padding(
                                     padding: const EdgeInsets.only(left: 8),
                                     child: Column(
@@ -231,6 +229,7 @@ class PostComponent extends ConsumerWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Container(
                                       padding: const EdgeInsets.only(
