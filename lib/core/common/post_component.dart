@@ -127,15 +127,15 @@ class PostComponent extends ConsumerWidget {
                               Row(
                                 children: [
                                   GestureDetector(
-                                      onTap: () =>
-                                          navigateToCommunityScreenFromPost(
-                                              context),
-                                      child: CircleAvatar(
-                                        backgroundImage: NetworkImage(
-                                            post.communityProfilePic),
-                                        radius: 16,
-                                      ),
-                                      Y),
+                                    onTap: () =>
+                                        navigateToCommunityScreenFromPost(
+                                            context),
+                                    child: CircleAvatar(
+                                      backgroundImage: NetworkImage(
+                                          post.communityProfilePic),
+                                      radius: 16,
+                                    ),
+                                  ),
                                   Padding(
                                     padding: const EdgeInsets.only(left: 8),
                                     child: Column(
