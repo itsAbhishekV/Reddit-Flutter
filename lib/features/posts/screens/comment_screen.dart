@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reddit_clone/core/common/error_text.dart';
 import 'package:reddit_clone/core/common/post_component.dart';
 import 'package:reddit_clone/features/posts/controller/post_controller.dart';
-import 'package:reddit_clone/features/widgets/comment_component.dart';
+import 'package:reddit_clone/core/common/comment_component.dart';
 
 import '../../../core/common/loader.dart';
 import '../../../models/post_model.dart';

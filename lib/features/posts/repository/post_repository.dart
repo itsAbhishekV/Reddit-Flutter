@@ -125,4 +125,40 @@ class PostRepository {
           .toList();
     });
   }
+
+  void commentDownvote(Comment comment, String userId) async {
+    if (comment.commentUpvotes.contains(userId)) {
+      _comments.doc(comment.id).update({
+        'commentUpvotes': FieldValue.arrayRemove([userId]),
+      });
+    }
+
+    if (comment.commentDownvotes.contains(userId)) {
+      _comments.doc(comment.id).update({
+        'commentDownvotes': FieldValue.arrayRemove([userId]),
+      });
+    } else {
+      _comments.doc(comment.id).update({
+        'commentDownvotes': FieldValue.arrayUnion([userId]),
+      });
+    }
+  }
+
+  void commentUpvote(Comment comment, String userId) async {
+    if (comment.commentDownvotes.contains(userId)) {
+      _comments.doc(comment.id).update({
+        'commentDownvotes': FieldValue.arrayRemove([userId]),
+      });
+    }
+
+    if (comment.commentUpvotes.contains(userId)) {
+      _comments.doc(comment.id).update({
+        'commentUpvotes': FieldValue.arrayRemove([userId]),
+      });
+    } else {
+      _comments.doc(comment.id).update({
+        'commentUpvotes': FieldValue.arrayUnion([userId]),
+      });
+    }
+  }
 }

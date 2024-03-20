@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
+import 'package:reddit_clone/features/posts/controller/post_controller.dart';
 
-import '../../core/constants/constants.dart';
+import '../constants/constants.dart';
 import '../../models/comment_model.dart';
 
 class CommentComponent extends ConsumerWidget {
@@ -10,13 +11,21 @@ class CommentComponent extends ConsumerWidget {
 
   const CommentComponent({super.key, required this.comment});
 
+  void commentUpvote(WidgetRef ref) {
+    ref.read(postControllerProvider.notifier).commentUpvote(comment);
+  }
+
+  void commentDownvote(WidgetRef ref) {
+    ref.read(postControllerProvider.notifier).commentDownvote(comment);
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider)!;
     return Container(
       color: const Color.fromRGBO(18, 18, 18, 1),
       padding: const EdgeInsets.symmetric(
-        horizontal: 8,
+        horizontal: 10,
         vertical: 8,
       ).copyWith(bottom: 0),
       child: Column(
@@ -72,27 +81,26 @@ class CommentComponent extends ConsumerWidget {
                                     ? Colors.deepOrange
                                     : Colors.grey,
                           ),
-                          onPressed: () {},
+                          onPressed: () => commentUpvote(ref),
                         ),
+                      ),
+                      const SizedBox(
+                        width: 4,
                       ),
                       Text(
                         '${comment.commentUpvotes.length - comment.commentDownvotes.length == 0 ? '0' : comment.commentUpvotes.length - comment.commentDownvotes.length}',
                         style: const TextStyle(
-                            fontSize: 12, fontWeight: FontWeight.w500),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.grey),
                       ),
                       const SizedBox(
-                        width: 6,
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8.0),
-                        child: VerticalDivider(
-                          thickness: 1,
-                        ),
+                        width: 4,
                       ),
                       SizedBox(
                         width: 30,
                         child: IconButton(
-                            onPressed: () {},
+                            onPressed: () => commentDownvote(ref),
                             icon: Icon(
                               Constants.down,
                               size: 20,
@@ -108,14 +116,18 @@ class CommentComponent extends ConsumerWidget {
                 IconButton(
                   onPressed: () {},
                   icon: const Icon(
-                    Icons.reply,
-                    size: 18,
+                    Icons.reply_sharp,
+                    size: 20,
                     color: Colors.grey,
                   ),
                 ),
                 const Text(
                   'Reply',
-                  style: TextStyle(fontSize: 14),
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14,
+                    color: Colors.grey,
+                  ),
                 ),
               ],
             ),

@@ -180,6 +180,16 @@ class PostController extends StateNotifier<bool> {
     _postRepository.downvote(post, userId);
   }
 
+  void commentUpvote(Comment comment) async {
+    final userId = _ref.watch(userProvider)!.model!.uid;
+    _postRepository.commentUpvote(comment, userId);
+  }
+
+  void commentDownvote(Comment comment) async {
+    final userId = _ref.watch(userProvider)!.model!.uid;
+    _postRepository.commentDownvote(comment, userId);
+  }
+
   Stream<Post> getPostById(String postId) {
     return _postRepository.getPostById(postId);
   }
