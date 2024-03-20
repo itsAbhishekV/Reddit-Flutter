@@ -193,6 +193,8 @@ class PostController extends StateNotifier<bool> {
     Comment comment = Comment(
         id: commentId,
         text: text,
+        commentUpvotes: [],
+        commentDownvotes: [],
         createdAt: DateTime.now(),
         postId: post.id,
         username: user.name,

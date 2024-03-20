@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class Comment {
   final String id;
   final String text;
@@ -5,15 +7,18 @@ class Comment {
   final String postId;
   final String username;
   final String profilePic;
+  final List<String> commentUpvotes;
+  final List<String> commentDownvotes;
 
-  Comment({
-    required this.id,
-    required this.text,
-    required this.createdAt,
-    required this.postId,
-    required this.username,
-    required this.profilePic,
-  });
+  Comment(
+      {required this.id,
+      required this.text,
+      required this.createdAt,
+      required this.postId,
+      required this.username,
+      required this.profilePic,
+      required this.commentDownvotes,
+      required this.commentUpvotes});
 
   Comment copyWith({
     String? id,
@@ -22,6 +27,8 @@ class Comment {
     String? postId,
     String? username,
     String? profilePic,
+    List<String>? commentUpvotes,
+    List<String>? commentDownvotes,
   }) {
     return Comment(
       id: id ?? this.id,
@@ -30,6 +37,8 @@ class Comment {
       postId: postId ?? this.postId,
       username: username ?? this.username,
       profilePic: profilePic ?? this.profilePic,
+      commentUpvotes: commentUpvotes ?? this.commentUpvotes,
+      commentDownvotes: commentDownvotes ?? this.commentDownvotes,
     );
   }
 
@@ -41,6 +50,8 @@ class Comment {
       'postId': postId,
       'username': username,
       'profilePic': profilePic,
+      'commentUpvotes': commentUpvotes,
+      'commentDownvotes': commentDownvotes
     };
   }
 
@@ -52,12 +63,14 @@ class Comment {
       postId: map['postId'] ?? '',
       username: map['username'] ?? '',
       profilePic: map['profilePic'] ?? '',
+      commentUpvotes: List<String>.from(map['commentUpvotes']),
+      commentDownvotes: List<String>.from(map['commentDownvotes']),
     );
   }
 
   @override
   String toString() {
-    return 'Comment(id: $id, text: $text, createdAt: $createdAt, postId: $postId, username: $username, profilePic: $profilePic)';
+    return 'Comment(id: $id, text: $text, createdAt: $createdAt, postId: $postId, username: $username, profilePic: $profilePic, commentUpvotes: $commentUpvotes, commentDownvotes: $commentDownvotes)';
   }
 
   @override
@@ -70,13 +83,17 @@ class Comment {
         other.createdAt == createdAt &&
         other.postId == postId &&
         other.username == username &&
-        other.profilePic == profilePic;
+        other.profilePic == profilePic &&
+        listEquals(other.commentUpvotes, commentUpvotes) &&
+        listEquals(other.commentDownvotes, commentDownvotes);
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
         text.hashCode ^
+        commentDownvotes.hashCode ^
+        commentUpvotes.hashCode ^
         createdAt.hashCode ^
         postId.hashCode ^
         username.hashCode ^
