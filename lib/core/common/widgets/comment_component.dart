@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
 import 'package:reddit_clone/features/posts/controller/post_controller.dart';
 
-import '../constants/constants.dart';
-import '../../models/comment_model.dart';
+import '../../constants/constants.dart';
+import '../../../models/comment_model.dart';
 
 class CommentComponent extends ConsumerWidget {
   final Comment comment;

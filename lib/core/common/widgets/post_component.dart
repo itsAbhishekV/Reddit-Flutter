@@ -7,10 +7,10 @@ import 'package:reddit_clone/features/posts/controller/post_controller.dart';
 import 'package:reddit_clone/theme/palette.dart';
 import 'package:routemaster/routemaster.dart';
 
-import '../../models/post_model.dart';
-import '../constants/constants.dart';
-import 'error_text.dart';
-import 'loader.dart';
+import '../../../models/post_model.dart';
+import '../../constants/constants.dart';
+import '../error_text.dart';
+import '../loader.dart';
 
 class PostComponent extends ConsumerWidget {
   final Post post;
@@ -229,107 +229,124 @@ class PostComponent extends ConsumerWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Container(
-                                      padding: const EdgeInsets.only(
-                                          left: 4, right: 4),
-                                      height: 35,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.grey, width: 0.4),
-                                        borderRadius: BorderRadius.circular(25),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          SizedBox(
-                                            width: 30,
-                                            child: IconButton(
-                                              icon: Icon(
-                                                Constants.up,
-                                                size: 20,
-                                                color: post.upvotes.contains(
-                                                        user.model!.uid)
-                                                    ? Colors.deepOrange
-                                                    : Colors.grey,
-                                              ),
-                                              onPressed: () => upvote(ref),
-                                            ),
-                                          ),
-                                          Text(
-                                            '${post.upvotes.length - post.downvotes.length == 0 ? 'Vote' : post.upvotes.length - post.downvotes.length}',
-                                            style: const TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                          const SizedBox(
-                                            width: 6,
-                                          ),
-                                          const Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                vertical: 8.0),
-                                            child: VerticalDivider(
-                                              thickness: 1,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 30,
-                                            child: IconButton(
-                                                onPressed: () => downvote(ref),
-                                                icon: Icon(
-                                                  Constants.down,
-                                                  size: 20,
-                                                  color: post.downvotes
-                                                          .contains(
-                                                              user.model!.uid)
-                                                      ? Colors.deepOrange
-                                                      : Colors.grey,
-                                                )),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                GestureDetector(
-                                  onTap: () => navigateToCommentScreen(context),
-                                  child: Container(
-                                    height: 35,
-                                    padding: const EdgeInsets.only(
-                                      right: 14,
-                                      left: 4,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Colors.grey, width: 0.4),
-                                      borderRadius: BorderRadius.circular(25),
-                                    ),
-                                    child: Row(
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
-                                        SizedBox(
-                                          width: 30,
-                                          child: IconButton(
-                                            onPressed: () {
-                                              navigateToCommentScreen(context);
-                                            },
-                                            icon: const Icon(
-                                                Icons.mode_comment_outlined,
-                                                size: 20,
-                                                color: Colors.grey),
+                                        Container(
+                                          padding: const EdgeInsets.only(
+                                              left: 4, right: 4),
+                                          height: 35,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.grey, width: 0.4),
+                                            borderRadius:
+                                                BorderRadius.circular(25),
                                           ),
-                                        ),
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text(
-                                          '${post.commentCount == 0 ? 'Comment' : post.commentCount}',
-                                          style: const TextStyle(fontSize: 14),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              SizedBox(
+                                                width: 30,
+                                                child: IconButton(
+                                                  icon: Icon(
+                                                    Constants.up,
+                                                    size: 20,
+                                                    color: post.upvotes
+                                                            .contains(
+                                                                user.model!.uid)
+                                                        ? Colors.deepOrange
+                                                        : Colors.grey,
+                                                  ),
+                                                  onPressed: () => upvote(ref),
+                                                ),
+                                              ),
+                                              Text(
+                                                '${post.upvotes.length - post.downvotes.length == 0 ? 'Vote' : post.upvotes.length - post.downvotes.length}',
+                                                style: const TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                              const SizedBox(
+                                                width: 6,
+                                              ),
+                                              const Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: 8.0),
+                                                child: VerticalDivider(
+                                                  thickness: 1,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 30,
+                                                child: IconButton(
+                                                    onPressed: () =>
+                                                        downvote(ref),
+                                                    icon: Icon(
+                                                      Constants.down,
+                                                      size: 20,
+                                                      color: post.downvotes
+                                                              .contains(user
+                                                                  .model!.uid)
+                                                          ? Colors.deepOrange
+                                                          : Colors.grey,
+                                                    )),
+                                              ),
+                                            ],
+                                          ),
                                         )
                                       ],
                                     ),
-                                  ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: GestureDetector(
+                                        onTap: () =>
+                                            navigateToCommentScreen(context),
+                                        child: Container(
+                                          height: 35,
+                                          padding: const EdgeInsets.only(
+                                            right: 14,
+                                            left: 4,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.grey, width: 0.4),
+                                            borderRadius:
+                                                BorderRadius.circular(25),
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              SizedBox(
+                                                width: 30,
+                                                child: IconButton(
+                                                  onPressed: () {
+                                                    navigateToCommentScreen(
+                                                        context);
+                                                  },
+                                                  icon: const Icon(
+                                                      Icons
+                                                          .mode_comment_outlined,
+                                                      size: 20,
+                                                      color: Colors.grey),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text(
+                                                '${post.commentCount == 0 ? 'Comment' : post.commentCount}',
+                                                style: const TextStyle(
+                                                    fontSize: 14),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 ref
                                     .watch(getCommunityByNameProvider(
