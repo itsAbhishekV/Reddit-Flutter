@@ -266,9 +266,9 @@ class PostComponent extends ConsumerWidget {
                                               Text(
                                                 '${post.upvotes.length - post.downvotes.length == 0 ? 'Vote' : post.upvotes.length - post.downvotes.length}',
                                                 style: const TextStyle(
-                                                    fontSize: 12,
+                                                    fontSize: 14,
                                                     fontWeight:
-                                                        FontWeight.w500),
+                                                        FontWeight.bold),
                                               ),
                                               const SizedBox(
                                                 width: 6,
@@ -337,9 +337,19 @@ class PostComponent extends ConsumerWidget {
                                                 width: 5,
                                               ),
                                               Text(
-                                                '${post.commentCount == 0 ? 'Comment' : post.commentCount}',
+                                                '${post.commentCount == 0 ? '' : post.commentCount}',
                                                 style: const TextStyle(
-                                                    fontSize: 14),
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              const SizedBox(width: 5),
+                                              const Text(
+                                                'Comments',
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               )
                                             ],
                                           ),
