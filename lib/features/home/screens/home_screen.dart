@@ -91,9 +91,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_filled),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.add),
+            label: 'Create',
           ),
         ],
         onTap: onPageChange,
