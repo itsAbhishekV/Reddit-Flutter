@@ -36,3 +36,9 @@ join existing ones, and engage in discussions.
 ![Comment Section](screenshots/commentScreen.png?raw=true "Comment Section")
 ![User Communities Drawer](screenshots/usercommunityDrawer.png?raw=true "User Communities Drawer")
 
+<img src="screenshots/loginScreen.png" alt="SLogin Screen" width="400" height="1000"/>
+<img src="screenshots/feedScreen.png" alt="Home Screen" width="400" height="1000"/>
+<img src="screenshots/userProfileScreen.png" alt="User Profile Screen" width="400" height="1000"/>
+<img src="screenshots/editUserProfileScreen.png" alt="Edit User Profile Screen" width="400" height="1000"/>
+<img src="screenshots/commentScreen.png" alt="Comment Section" width="400" height="1000"/>
+<img src="screenshots/usercommunityDrawer.png" alt="SUser Communities Drawer" width="400" height="1000"/>
