@@ -26,3 +26,13 @@ join existing ones, and engage in discussions.
 - Cloud Firestore
 - Firebase Storage
 - Riverpod (State Management)
+
+## Screenshots
+
+![Login Screen](screenshots/loginScreen.png?raw=true "Login Screen")
+![Home Screen](screenshots/feedScreen.png?raw=true "Home Screen")
+![User Profile Screen](screenshots/userProfileScreen.png?raw=true "User Profile Screen")
+![Edit User Profile Screen](screenshots/editUserProfileScreen.png?raw=true "Edit User Profile Screen")
+![Comment Section](screenshots/commentScreen.png?raw=true "Comment Section")
+![User Communities Drawer](screenshots/usercommunityDrawer.png?raw=true "User Communities Drawer")
+
