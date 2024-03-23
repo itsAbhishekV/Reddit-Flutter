@@ -29,16 +29,15 @@ join existing ones, and engage in discussions.
 
 ## Screenshots
 
-![Login Screen](screenshots/loginScreen.png?raw=true "Login Screen")
-![Home Screen](screenshots/feedScreen.png?raw=true "Home Screen")
-![User Profile Screen](screenshots/userProfileScreen.png?raw=true "User Profile Screen")
-![Edit User Profile Screen](screenshots/editUserProfileScreen.png?raw=true "Edit User Profile Screen")
-![Comment Section](screenshots/commentScreen.png?raw=true "Comment Section")
-![User Communities Drawer](screenshots/usercommunityDrawer.png?raw=true "User Communities Drawer")
-
-<img src="screenshots/loginScreen.png" alt="SLogin Screen" width="400" height="1000"/>
-<img src="screenshots/feedScreen.png" alt="Home Screen" width="400" height="1000"/>
-<img src="screenshots/userProfileScreen.png" alt="User Profile Screen" width="400" height="1000"/>
-<img src="screenshots/editUserProfileScreen.png" alt="Edit User Profile Screen" width="400" height="1000"/>
-<img src="screenshots/commentScreen.png" alt="Comment Section" width="400" height="1000"/>
-<img src="screenshots/usercommunityDrawer.png" alt="SUser Communities Drawer" width="400" height="1000"/>
+- Login
+  <img src="screenshots/loginScreen.png" alt="SLogin Screen" width="350" height="800"/>
+- Home
+  <img src="screenshots/feedScreen.png" alt="Home Screen" width="350" height="800"/>
+- User Profile
+  <img src="screenshots/userProfileScreen.png" alt="User Profile Screen" width="350" height="800"/>
+- Edit User Profile
+  <img src="screenshots/editUserProfileScreen.png" alt="Edit User Profile Screen" width="350" height="800"/>
+- Comment Section
+  <img src="screenshots/commentScreen.png" alt="Comment Section" width="350" height="800"/>
+- Community Drawer
+  <img src="screenshots/usercommunityDrawer.png" alt="SUser Communities Drawer" width="350" height="800"/>
