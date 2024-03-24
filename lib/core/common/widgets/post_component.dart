@@ -193,6 +193,23 @@ class PostComponent extends ConsumerWidget {
                                     ))
                             ],
                           ),
+                          if (post.awards.isNotEmpty) ...[
+                            const SizedBox(height: 8),
+                            SizedBox(
+                              height: 25,
+                              child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: post.awards.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    final award = post.awards[index];
+                                    return Image.asset(
+                                      Constants.awards[award]!,
+                                      height: 24,
+                                    );
+                                  }),
+                            ),
+                          ],
                           Padding(
                             padding: const EdgeInsets.only(top: 8.0),
                             child: Text(
