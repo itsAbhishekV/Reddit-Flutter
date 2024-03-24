@@ -29,15 +29,15 @@ join existing ones, and engage in discussions.
 
 ## Screenshots
 
-- Login
-  <img src="screenshots/loginScreen.png" alt="SLogin Screen" width="350" height="800"/>
-- Home
-  <img src="screenshots/feedScreen.png" alt="Home Screen" width="350" height="800"/>
-- User Profile
-  <img src="screenshots/userProfileScreen.png" alt="User Profile Screen" width="350" height="800"/>
-- Edit User Profile
-  <img src="screenshots/editUserProfileScreen.png" alt="Edit User Profile Screen" width="350" height="800"/>
-- Comment Section
-  <img src="screenshots/commentScreen.png" alt="Comment Section" width="350" height="800"/>
-- Community Drawer
-  <img src="screenshots/usercommunityDrawer.png" alt="SUser Communities Drawer" width="350" height="800"/>
+- Login </br>
+  <img src="screenshots/loginScreen.png" alt="SLogin Screen" width="300" height="650"/>
+- Home </br>
+  <img src="screenshots/feedScreen.png" alt="Home Screen" width="300" height="650"/>
+- User Profile </br>
+  <img src="screenshots/userProfileScreen.png" alt="User Profile Screen" width="300" height="650"/>
+- Edit User Profile </br>
+  <img src="screenshots/editUserProfileScreen.png" alt="Edit User Profile Screen" width="300" height="650"/>
+- Comment Section </br>
+  <img src="screenshots/commentScreen.png" alt="Comment Section" width="300" height="650"/>
+- Community Drawer </br>
+  <img src="screenshots/usercommunityDrawer.png" alt="SUser Communities Drawer" width="300" height="650"/>
