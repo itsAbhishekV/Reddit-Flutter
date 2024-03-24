@@ -1,3 +1,4 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reddit_clone/core/constants/constants.dart';
@@ -75,14 +76,14 @@ class _ProfileDrawerState extends ConsumerState<ProfileDrawer> {
               height: 20,
             ),
             ListTile(
-              leading: const Icon(Icons.person_outline_outlined),
+              leading: const Icon(EvaIcons.personOutline),
               title: const Text('My profile'),
               onTap: () {
                 navigateToUserProfile(context, user.model?.uid ?? "");
               },
             ),
             ListTile(
-              leading: const Icon(Icons.add_circle_outline_outlined),
+              leading: const Icon(EvaIcons.plusCircleOutline),
               title: const Text('Create a community'),
               iconColor: Colors.blue,
               onTap: () {
@@ -90,7 +91,7 @@ class _ProfileDrawerState extends ConsumerState<ProfileDrawer> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.logout_outlined),
+              leading: const Icon(EvaIcons.logOutOutline),
               title: const Text('Log out'),
               iconColor: Colors.red,
               onTap: () {

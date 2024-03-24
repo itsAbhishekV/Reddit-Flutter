@@ -1,3 +1,4 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -55,7 +56,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         leading: Builder(
           builder: (context) {
             return IconButton(
-              icon: const Icon(Icons.menu),
+              icon: const Icon(EvaIcons.menu),
               onPressed: () {
                 displayCommunityDrawer(context);
               },
@@ -64,11 +65,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ),
         actions: [
           IconButton(
-              onPressed: () {
-                showSearch(
-                    context: context, delegate: SearchCommunityDelegate(ref));
-              },
-              icon: const Icon(Icons.search)),
+            onPressed: () {
+              showSearch(
+                  context: context, delegate: SearchCommunityDelegate(ref));
+            },
+            icon: const Icon(
+              EvaIcons.search,
+              size: 28,
+            ),
+          ),
           Builder(builder: (context) {
             return IconButton(
               onPressed: () {
@@ -76,7 +81,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               },
               icon: CircleAvatar(
                 backgroundImage: NetworkImage(user.model?.profilePic ?? ""),
-                radius: 20,
+                radius: 18,
               ),
             );
           })

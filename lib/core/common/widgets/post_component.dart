@@ -1,4 +1,5 @@
 import 'package:any_link_preview/any_link_preview.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
@@ -107,9 +108,15 @@ class PostComponent extends ConsumerWidget {
       children: [
         Container(
           decoration: BoxDecoration(
+            border: const Border(
+              bottom: BorderSide(
+                width: 0.2,
+                color: Colors.grey,
+              ),
+            ),
             color: currentTheme.drawerTheme.backgroundColor,
           ),
-          padding: const EdgeInsets.all(6),
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
           child: Row(
             children: [
               Expanded(
@@ -240,7 +247,7 @@ class PostComponent extends ConsumerWidget {
                                           height: 35,
                                           decoration: BoxDecoration(
                                             border: Border.all(
-                                                color: Colors.grey, width: 0.4),
+                                                color: Colors.grey, width: 0.3),
                                             borderRadius:
                                                 BorderRadius.circular(25),
                                           ),
@@ -313,7 +320,7 @@ class PostComponent extends ConsumerWidget {
                                           ),
                                           decoration: BoxDecoration(
                                             border: Border.all(
-                                                color: Colors.grey, width: 0.4),
+                                                color: Colors.grey, width: 0.3),
                                             borderRadius:
                                                 BorderRadius.circular(25),
                                           ),
@@ -327,8 +334,8 @@ class PostComponent extends ConsumerWidget {
                                                         context);
                                                   },
                                                   icon: const Icon(
-                                                      Icons
-                                                          .mode_comment_outlined,
+                                                      EvaIcons
+                                                          .messageSquareOutline,
                                                       size: 20,
                                                       color: Colors.grey),
                                                 ),
@@ -370,7 +377,7 @@ class PostComponent extends ConsumerWidget {
                                                     deleteItem(context, ref),
                                                 icon: const Icon(
                                                   Icons.admin_panel_settings,
-                                                  size: 20,
+                                                  size: 22,
                                                   color: Colors.grey,
                                                 ));
                                           }
@@ -378,7 +385,12 @@ class PostComponent extends ConsumerWidget {
                                         },
                                         error: (error, stackTract) =>
                                             ErrorText(error: error.toString()),
-                                        loading: () => const Loader())
+                                        loading: () => const Loader()),
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(EvaIcons.awardOutline,
+                                      color: Colors.grey, size: 22),
+                                ),
                               ],
                             ),
                           )
