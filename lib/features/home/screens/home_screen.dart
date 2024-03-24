@@ -1,6 +1,7 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
 import 'package:reddit_clone/features/home/delegates/search_community_delegate.dart';
@@ -49,14 +50,27 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
         ),
         backgroundColor: currentTheme.appBarTheme.backgroundColor,
-        title: const Text(
-          'Home',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        title: Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(8),
+            color: Colors.grey.shade900,
+          ),
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+            child: Text(
+              'Home',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
         ),
         leading: Builder(
           builder: (context) {
             return IconButton(
-              icon: const Icon(EvaIcons.menu),
+              icon: const Icon(
+                EvaIcons.menu,
+                size: 28,
+              ),
               onPressed: () {
                 displayCommunityDrawer(context);
               },
