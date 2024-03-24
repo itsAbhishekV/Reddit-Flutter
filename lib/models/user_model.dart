@@ -30,7 +30,16 @@ extension FirebaseUserToUserModel on User {
         uid: uid,
         isAuthenticated: true,
         karma: 0,
-        awards: []);
+        awards: [
+          'awesomeAns',
+          'helpful',
+          'plusone',
+          'rocket',
+          'thankyou',
+          'til',
+          'gold',
+          'platinum'
+        ]);
   }
 }
 

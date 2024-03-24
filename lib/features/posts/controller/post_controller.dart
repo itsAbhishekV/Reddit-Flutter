@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reddit_clone/core/enums/enums.dart';
 import 'package:reddit_clone/core/providers/storage_repository_provider.dart';
@@ -235,5 +236,24 @@ class PostController extends StateNotifier<bool> {
 
   Stream<List<Comment>> fetchPostComment(String postId) {
     return _postRepository.getComments(postId);
+  }
+
+  void sendAward(
+      {required Post post,
+      required String award,
+      required BuildContext context}) async {
+    final user = _ref.read(userProvider)!;
+    final res = await _postRepository.sendAward(post, award, user.model!.uid);
+    res.fold((l) => showSnackBar(context, l.message), (r) {
+      _ref
+          .read(userProfileControllerProvider.notifier)
+          .updateUserKarma(UserKarma.awardPost);
+      _ref.read(userProvider.notifier).update((state) {
+        state?.model!.awards.remove(award);
+        return state;
+      });
+      showSnackBar(context, 'Post awarded Successfully');
+      Routemaster.of(context).pop();
+    });
   }
 }

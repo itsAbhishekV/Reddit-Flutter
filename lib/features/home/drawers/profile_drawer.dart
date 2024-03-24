@@ -76,7 +76,7 @@ class _ProfileDrawerState extends ConsumerState<ProfileDrawer> {
               height: 20,
             ),
             ListTile(
-              leading: const Icon(EvaIcons.personOutline),
+              leading: const Icon(Icons.person_outline_outlined),
               title: const Text('My profile'),
               onTap: () {
                 navigateToUserProfile(context, user.model?.uid ?? "");

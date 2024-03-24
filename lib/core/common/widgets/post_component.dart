@@ -85,6 +85,12 @@ class PostComponent extends ConsumerWidget {
     ref.read(postControllerProvider.notifier).downvote(post);
   }
 
+  void sendAward(WidgetRef ref, String award, BuildContext context) async {
+    ref
+        .read(postControllerProvider.notifier)
+        .sendAward(post: post, award: award, context: context);
+  }
+
   void navigateToUserProfileFromPost(BuildContext context) {
     Routemaster.of(context).push('/u/${post.uid}');
   }
@@ -387,7 +393,43 @@ class PostComponent extends ConsumerWidget {
                                             ErrorText(error: error.toString()),
                                         loading: () => const Loader()),
                                 IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) => Dialog(
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(20),
+                                                child: GridView.builder(
+                                                    shrinkWrap: true,
+                                                    gridDelegate:
+                                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                                            crossAxisCount: 4),
+                                                    itemCount: user
+                                                        .model!.awards.length,
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      final award = user
+                                                          .model!.awards[index];
+                                                      return GestureDetector(
+                                                        onTap: () => sendAward(
+                                                            ref,
+                                                            award,
+                                                            context),
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8.0),
+                                                          child: Image.asset(
+                                                              Constants.awards[
+                                                                  award]!),
+                                                        ),
+                                                      );
+                                                    }),
+                                              ),
+                                            ));
+                                  },
                                   icon: const Icon(EvaIcons.awardOutline,
                                       color: Colors.grey, size: 22),
                                 ),
