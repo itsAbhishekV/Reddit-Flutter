@@ -41,4 +41,6 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-reddit.jks
+/android/app/reddit.jks
+
+/android/key.properties

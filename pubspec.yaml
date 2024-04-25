@@ -44,10 +44,7 @@ dependencies:
   fpdart: ^1.1.0
   routemaster: ^1.0.1
   dotted_border: ^2.1.0
-  file_picker:
-    git:
-      url: https://github.com/easyhour/flutter_file_picker.git
-      ref: 1455-NPE-compress # or specify a different branch or tag
+  file_picker: ^8.0.2
   shared_preferences: ^2.2.2
   uuid: ^4.3.3
   any_link_preview: ^3.0.1

@@ -6,6 +6,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
 import 'package:reddit_clone/features/community/repository/community_repository.dart';
 import 'package:reddit_clone/models/community_model.dart';
+import 'package:reddit_clone/models/post_model.dart';
 import 'package:routemaster/routemaster.dart';
 
 import '../../../core/constants/constants.dart';
@@ -26,6 +27,10 @@ final getCommunityByNameProvider = StreamProvider.family((ref, String name) {
 
 final searchCommunityProvider = StreamProvider.family((ref, String query) {
   return ref.watch(communityControllerProvider.notifier).searchCommunity(query);
+});
+
+final getCommunityPostsProvider = StreamProvider.family((ref, String name){
+  return ref.watch(communityControllerProvider.notifier).getCommuntiyPosts(name);
 });
 
 final communityControllerProvider =
@@ -69,6 +74,10 @@ class CommunityController extends StateNotifier<bool> {
       showSnackBar(context, '${community.name} was created!');
       Routemaster.of(context).pop();
     });
+  }
+
+  Stream<List<Post>> getCommuntiyPosts(String name){
+    return _communityRepository.getCommunityPosts(name);
   }
 
   Stream<Community> getCommunityByName(String name) {
