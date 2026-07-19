@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
-import 'package:reddit_clone/features/posts/controller/post_controller.dart';
+import 'package:reddit_clone/features/auth/auth.dart';
+import 'package:reddit_clone/features/posts/posts.dart';
 
 import '../../constants/constants.dart';
-import '../../../models/comment_model.dart';
+import '../../../models/models.dart';
 
 class CommentComponent extends ConsumerWidget {
   final Comment comment;

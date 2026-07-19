@@ -7,9 +7,6 @@ import 'package:reddit_clone/core/failures.dart';
 import 'package:reddit_clone/core/providers/firbase_provider.dart';
 import 'package:reddit_clone/core/type_defs.dart';
 
-import '../../models/community_model.dart';
-import '../../models/post_model.dart';
-
 final storageRepositoryProvider = Provider(
     (ref) => StorageRepository(firebaseStorage: ref.watch(storageProvider)));
 

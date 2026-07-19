@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:reddit_clone/core/common/error_text.dart';
-import 'package:reddit_clone/features/community/controller/community_controller.dart';
+import 'package:reddit_clone/core/common/common.dart';
+import 'package:reddit_clone/features/community/community.dart';
 import 'package:routemaster/routemaster.dart';
-
-import '../../../core/common/loader.dart';
 
 class SearchCommunityDelegate extends SearchDelegate {
   final WidgetRef ref;

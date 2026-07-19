@@ -2,13 +2,13 @@ import 'package:any_link_preview/any_link_preview.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
-import 'package:reddit_clone/features/community/controller/community_controller.dart';
-import 'package:reddit_clone/features/posts/controller/post_controller.dart';
+import 'package:reddit_clone/features/auth/auth.dart';
+import 'package:reddit_clone/features/community/community.dart';
+import 'package:reddit_clone/features/posts/posts.dart';
 import 'package:reddit_clone/theme/palette.dart';
 import 'package:routemaster/routemaster.dart';
 
-import '../../../models/post_model.dart';
+import '../../../models/models.dart';
 import '../../constants/constants.dart';
 import '../error_text.dart';
 import '../loader.dart';
