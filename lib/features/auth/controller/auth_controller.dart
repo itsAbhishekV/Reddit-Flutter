@@ -4,8 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:reddit_clone/features/auth/repository/auth_repository.dart';
 
-import '../../../core/utils.dart';
-import '../../../models/user_model.dart';
+import '../../../models/models.dart';
 
 final userProvider = StateProvider<UserState?>((ref) => null);
 
