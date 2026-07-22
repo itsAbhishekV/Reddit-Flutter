@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:reddit_clone/core/enums/enums.dart';
 import 'package:reddit_clone/core/providers/storage_repository_provider.dart';
 import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
