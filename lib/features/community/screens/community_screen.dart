@@ -1,14 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:reddit_clone/core/common/loader.dart';
-import 'package:reddit_clone/core/common/widgets/post_component.dart';
-import 'package:reddit_clone/core/common/error_text.dart';
-import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
-import 'package:reddit_clone/features/community/controller/community_controller.dart';
+import 'package:reddit_clone/core/common/common.dart';
+import 'package:reddit_clone/features/auth/auth.dart';
+import 'package:reddit_clone/features/community/community.dart';
 import 'package:routemaster/routemaster.dart';
 
-import '../../../models/community_model.dart';
+import '../../../models/models.dart';
 
 class CommunityScreen extends ConsumerWidget {
   final String name;
@@ -128,7 +126,6 @@ class CommunityScreen extends ConsumerWidget {
           },
           body: ref.watch(getCommunityPostsProvider(name)).when(
             data: (posts) {
-              print(posts);
               return CustomScrollView(
                 shrinkWrap: true,
                 slivers: [

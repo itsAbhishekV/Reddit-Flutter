@@ -4,16 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
+import 'package:reddit_clone/features/auth/auth.dart';
 import 'package:reddit_clone/features/community/repository/community_repository.dart';
-import 'package:reddit_clone/models/community_model.dart';
-import 'package:reddit_clone/models/post_model.dart';
+import 'package:reddit_clone/models/models.dart';
 import 'package:routemaster/routemaster.dart';
 
 import '../../../core/constants/constants.dart';
-import '../../../core/failures.dart';
-import '../../../core/providers/storage_repository_provider.dart';
-import '../../../core/utils.dart';
+import '../../../core/core.dart';
 
 final userCommunityProvider = StreamProvider((ref) {
   final communityController = ref.watch(communityControllerProvider.notifier);

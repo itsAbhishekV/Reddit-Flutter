@@ -3,13 +3,12 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:reddit_clone/core/common/loader.dart';
-import 'package:reddit_clone/core/utils.dart';
-import 'package:reddit_clone/features/community/controller/community_controller.dart';
+import 'package:reddit_clone/core/common/common.dart';
+import 'package:reddit_clone/core/core.dart';
+import 'package:reddit_clone/features/community/community.dart';
 
-import '../../../core/common/error_text.dart';
 import '../../../core/constants/constants.dart';
-import '../../../models/community_model.dart';
+import '../../../models/models.dart';
 import '../../../theme/palette.dart';
 
 class EditCommunityScreen extends ConsumerStatefulWidget {
