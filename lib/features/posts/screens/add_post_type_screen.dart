@@ -3,13 +3,12 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:reddit_clone/core/common/error_text.dart';
-import 'package:reddit_clone/features/community/controller/community_controller.dart';
-import 'package:reddit_clone/features/posts/controller/post_controller.dart';
-import 'package:reddit_clone/models/community_model.dart';
+import 'package:reddit_clone/core/common/common.dart';
+import 'package:reddit_clone/core/core.dart';
+import 'package:reddit_clone/features/community/community.dart';
+import 'package:reddit_clone/features/posts/posts.dart';
+import 'package:reddit_clone/models/models.dart';
 
-import '../../../core/common/loader.dart';
-import '../../../core/utils.dart';
 import '../../../theme/palette.dart';
 
 class AddPostTypeScreen extends ConsumerStatefulWidget {
@@ -77,7 +76,6 @@ class _AddPostTypeScreenState extends ConsumerState<AddPostTypeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final currentTheme = ref.watch(themeNotifierProvider);
     final isTypeImage = widget.type == 'image';
     final isTypelink = widget.type == 'link';
     final isTypeText = widget.type == 'text';

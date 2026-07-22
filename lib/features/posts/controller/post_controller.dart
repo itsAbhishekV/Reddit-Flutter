@@ -5,18 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
-import 'package:reddit_clone/core/enums/enums.dart';
-import 'package:reddit_clone/core/providers/storage_repository_provider.dart';
-import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
+import 'package:reddit_clone/core/core.dart';
+import 'package:reddit_clone/features/auth/auth.dart';
 import 'package:reddit_clone/features/posts/repository/post_repository.dart';
-import 'package:reddit_clone/features/user_profile/controller/user_profile_controller.dart';
-import 'package:reddit_clone/models/comment_model.dart';
+import 'package:reddit_clone/features/user_profile/user_profile.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../core/utils.dart';
-import '../../../models/community_model.dart';
-import '../../../models/post_model.dart';
+import '../../../models/models.dart';
 
 final postControllerProvider =
     StateNotifierProvider<PostController, bool>((ref) {
