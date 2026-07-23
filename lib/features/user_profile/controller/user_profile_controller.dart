@@ -3,14 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
-import 'package:reddit_clone/core/enums/enums.dart';
-import 'package:reddit_clone/core/providers/storage_repository_provider.dart';
-import 'package:reddit_clone/models/post_model.dart';
+import 'package:reddit_clone/core/core.dart';
 import 'package:routemaster/routemaster.dart';
 
-import '../../../core/utils.dart';
-import '../../../models/user_model.dart';
-import '../../auth/controller/auth_controller.dart';
+import '../../../models/models.dart';
+import '../../auth/auth.dart';
 import '../repository/user_profile_repository.dart';
 
 final userProfileControllerProvider =

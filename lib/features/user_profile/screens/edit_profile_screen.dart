@@ -3,13 +3,12 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:reddit_clone/core/common/common.dart';
 import 'package:reddit_clone/core/constants/constants.dart';
-import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
-import 'package:reddit_clone/features/user_profile/controller/user_profile_controller.dart';
+import 'package:reddit_clone/core/core.dart';
+import 'package:reddit_clone/features/auth/auth.dart';
+import 'package:reddit_clone/features/user_profile/user_profile.dart';
 
-import '../../../core/common/error_text.dart';
-import '../../../core/common/loader.dart';
-import '../../../core/utils.dart';
 import '../../../theme/palette.dart';
 
 class EditProfileScreen extends ConsumerStatefulWidget {

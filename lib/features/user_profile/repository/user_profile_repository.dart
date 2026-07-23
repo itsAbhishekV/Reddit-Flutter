@@ -1,15 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:reddit_clone/core/constants/firebase_constants.dart';
-import 'package:reddit_clone/core/enums/enums.dart';
-import 'package:reddit_clone/core/failures.dart';
-import 'package:reddit_clone/core/providers/firbase_provider.dart';
-import 'package:reddit_clone/models/post_model.dart';
-import 'package:reddit_clone/models/user_model.dart';
-
-import '../../../core/type_defs.dart';
+import 'package:reddit_clone/core/core.dart';
+import 'package:reddit_clone/models/models.dart';
 
 final userProfileRepositoryProvider = Provider(
     (ref) => UserProfileRepository(firestore: ref.watch(firestoreProvider)));
