@@ -30,7 +30,7 @@ class Palette {
         backgroundColor: drawerColor,
       ),
       primaryColor: redColor,
-      cardTheme: const CardTheme(color: drawerColor));
+      cardTheme: const CardThemeData(color: drawerColor));
 
   static var lightModeAppTheme = ThemeData.light().copyWith(
       scaffoldBackgroundColor: whiteColor,
@@ -46,7 +46,7 @@ class Palette {
         backgroundColor: whiteColor,
       ),
       primaryColor: redColor,
-      cardTheme: const CardTheme(color: whiteColor));
+      cardTheme: const CardThemeData(color: whiteColor));
 }
 
 class ThemeNotifier extends StateNotifier<ThemeData> {
