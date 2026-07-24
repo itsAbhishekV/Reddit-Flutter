@@ -6,7 +6,7 @@ void showSnackBar(BuildContext context, String text) {
 }
 
 Future<FilePickerResult?> pickImage() async {
-  final image = await FilePicker.platform.pickFiles(
+  final image = await FilePicker.pickFiles(
     type: FileType.image,
     compressionQuality: 30,
   );
