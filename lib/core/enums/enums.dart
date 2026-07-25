@@ -1,5 +1,3 @@
-enum ThemeModeEnum { dark, light }
-
 enum UserKarma {
   comment(1),
   textPost(2),
