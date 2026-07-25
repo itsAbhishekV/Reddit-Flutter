@@ -125,12 +125,13 @@ class _AddPostTypeScreenState extends ConsumerState<AddPostTypeScreen> {
                     GestureDetector(
                         onTap: selectBannerImage,
                         child: DottedBorder(
-                          borderType: BorderType.RRect,
-                          radius: const Radius.circular(10),
-                          dashPattern: const [10, 4],
-                          strokeCap: StrokeCap.round,
-                          color: Palette
-                              .darkModeAppTheme.textTheme.bodyMedium!.color!,
+                          options: RoundedRectDottedBorderOptions(
+                            radius: const Radius.circular(10),
+                            dashPattern: const [10, 4],
+                            strokeCap: StrokeCap.round,
+                            color: Palette.darkModeAppTheme.textTheme
+                                .bodyMedium!.color!,
+                          ),
                           child: Container(
                             width: double.infinity,
                             height: 160,
