@@ -1,35 +1,15 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:reddit_clone/core/constants/constants.dart';
-import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
+import 'package:reddit_clone/features/auth/auth.dart';
 import 'package:reddit_clone/theme/palette.dart';
 import 'package:routemaster/routemaster.dart';
 
-// class ProfileDrawer extends ConsumerStatefulWidget {
-//
-//
-//   const ProfileDrawer({super.key});
-//
-//
-//
-//   @override
-//   Widget build(BuildContext context, WidgetRef ref) {
-//
-//   }
-//
-// }
-
-class ProfileDrawer extends ConsumerStatefulWidget {
+class ProfileDrawer extends ConsumerWidget {
   const ProfileDrawer({super.key});
 
-  @override
-  ConsumerState createState() => _ProfileDrawerState();
-}
-
-class _ProfileDrawerState extends ConsumerState<ProfileDrawer> {
   void logOut(WidgetRef ref) {
-    ref.watch(authControllerProvider.notifier).logOut();
+    ref.read(authControllerProvider.notifier).logOut();
   }
 
   void navigateToCommunity(BuildContext context) {
@@ -41,12 +21,13 @@ class _ProfileDrawerState extends ConsumerState<ProfileDrawer> {
   }
 
   void toggleTheme(WidgetRef ref) {
-    ref.watch(themeNotifierProvider.notifier).toggleTheme();
+    ref.read(themeNotifierProvider.notifier).toggleTheme();
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider)!;
+    final isDarkMode = ref.watch(themeNotifierProvider).brightness == Brightness.dark;
     return Drawer(
       child: SafeArea(
         child: Column(
@@ -62,7 +43,7 @@ class _ProfileDrawerState extends ConsumerState<ProfileDrawer> {
               height: 35,
             ),
             Text(
-              'u/${user.model?.name.replaceAll(" ", "")}' ?? '',
+              'u/${user.model?.name.replaceAll(" ", "")}',
               style: const TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 18,
@@ -99,13 +80,11 @@ class _ProfileDrawerState extends ConsumerState<ProfileDrawer> {
               },
             ),
             const SizedBox(height: 15),
-            Switch.adaptive(
-              activeColor: Colors.blueAccent,
-              value: ref.watch(themeNotifierProvider.notifier).mode ==
-                  ThemeMode.dark,
-              onChanged: (val) => setState(() {
-                toggleTheme(ref);
-              }),
+            SwitchListTile.adaptive(
+              title: const Text('Dark mode'),
+              activeThumbColor: Colors.blueAccent,
+              value: isDarkMode,
+              onChanged: (val) => toggleTheme(ref),
             ),
           ],
         ),
