@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -9,8 +8,6 @@ import 'package:reddit_clone/core/failures.dart';
 import 'package:reddit_clone/core/providers/firbase_provider.dart';
 import 'package:reddit_clone/core/type_defs.dart';
 import 'package:reddit_clone/models/user_model.dart';
-
-import '../../../core/constants/constants.dart';
 
 final authRepositoryProvider = Provider((ref) => AuthRepository(
     firestore: ref.read(firestoreProvider),
@@ -21,6 +18,7 @@ class AuthRepository {
   final FirebaseFirestore _firestore;
   final FirebaseAuth _auth;
   final GoogleSignIn _googleSignIn;
+  bool _googleSignInInitialized = false;
 
   AuthRepository({
     required FirebaseFirestore firestore,
@@ -37,10 +35,16 @@ class AuthRepository {
 
   FutureEither<UserModel> signInWithGoogle() async {
     try {
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      final googleAuth = await googleUser?.authentication;
-      final credential = GoogleAuthProvider.credential(
-          accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+      if (!_googleSignInInitialized) {
+        await _googleSignIn.initialize(
+          serverClientId: FirebaseConstants.googleSignInServerClientId,
+        );
+        _googleSignInInitialized = true;
+      }
+      final GoogleSignInAccount googleUser = await _googleSignIn.authenticate();
+      final googleAuth = googleUser.authentication;
+      final credential =
+          GoogleAuthProvider.credential(idToken: googleAuth.idToken);
 
       UserCredential userCredentials =
           await _auth.signInWithCredential(credential);
