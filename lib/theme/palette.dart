@@ -46,7 +46,7 @@ class Palette {
         backgroundColor: whiteColor,
       ),
       primaryColor: redColor,
-      cardTheme: const CardThemeData(color: whiteColor));
+      cardTheme: CardThemeData(color: Colors.grey.shade200));
 }
 
 class ThemeNotifier extends StateNotifier<ThemeData> {

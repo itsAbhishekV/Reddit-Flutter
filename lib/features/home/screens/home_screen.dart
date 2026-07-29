@@ -1,9 +1,8 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:reddit_clone/features/auth/controller/auth_controller.dart';
+import 'package:reddit_clone/features/auth/auth.dart';
 import 'package:reddit_clone/features/home/delegates/search_community_delegate.dart';
 import 'package:reddit_clone/features/home/drawers/communitylist_drawer.dart';
 import 'package:reddit_clone/features/home/drawers/profile_drawer.dart';
@@ -45,7 +44,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0), // Adjust height as needed
           child: Container(
-            color: Colors.grey, // Change color for your desired border
+            color: currentTheme.dividerColor,
             height: 0.6, // Adjust height as needed
           ),
         ),
@@ -54,13 +53,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(8),
-            color: Colors.grey.shade900,
+            color: currentTheme.cardTheme.color,
           ),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
             child: Text(
               'Home',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: currentTheme.appBarTheme.iconTheme?.color,
+              ),
             ),
           ),
         ),
